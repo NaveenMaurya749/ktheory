@@ -1,0 +1,119 @@
+In this chapter, we will develop the notion of the Grothendieck Group $K_0$ accross a variety of contexts. 
+
+\section{$K_0$ of a ring}
+Let $R$ be a (unital) ring. The interesting objects of study will be finitely generated projective modules over $R$.
+We denote by $\mathbf{P}(R)$ the set of isomorphism classes of fintely generated projective modules over $R$.
+Note the $\mathbf{P}(R)$ derives a monoid structure through $\oplus$ because direct sums yield an associative operation that preserves isomorphisms.
+This monoid is also abelian due to the isomorphisms $M \oplus N \cong N \oplus M$ for any $R$-modules.
+
+The idea is to consider the group naturally derived by implementing inverses for all elements in this monoid.
+
+\subsection{Group Completion of a Monoid}
+Given an (abelian) monoid $(M, +)$, we can derive an (abelian) group associated to $M$, which we shall call $\tilde{M}$, via the following procedure:
+
+Define an equivalence relation on $M \times M$ by 
+\[(a,b) \sim (c,d) \Leftrightarrow  a + d + e = b + c + e \text{ for some $e$ in $M$.} \]
+This indeed gives us an equivalence relation.
+Let $\tilde{M}$ be the set of equivalence classes of $M \times M$ under this relation. This set admits a natural (abelian) group operation defined by
+\[
+  [(a,b)] + [(c,d)] := [(a+c,b+d)]
+\]
+This is a well-defined, abelian and associative operation on $\tilde{M}$ with the identity element $0 := [(0,0)]$ represented by any $(l,l)$. 
+Each element $[(a,b)]$ admits an inverse given by $[(b,a)]$ as $[(a,b)]+[(b,a)]=[(a+b,b+a)] = 0$. 
+
+A very familiar example of this construction is the abelian group $\Z$, which is the group completion of the abelian monoid $\N$ under $+$.
+
+This construction is natural in $M$ and follows a suitable universal property which we shall state. 
+
+\begin{proposition}[Universal property of Group Completion]
+  We have a monoid homomorphism $i : M \to \tilde{M}$ such that for any (abelian) group $G$, and a monoid homomorphism $\varphi : M \to G$, we have that 
+  $\varphi$ must factor uniquely through $i$. That is, there is a unique map $\tilde{\varphi} : \tilde{M} \to G$ such that the following diagram commutes:
+  \[
+  \begin{tikzcd}
+    M \arrow[r, "i"] \arrow[dr, "\varphi"'] & \tilde{M} \arrow[d, dashed, "\tilde{\varphi}"] \\
+  & G 
+  \end{tikzcd}
+  \]
+\end{proposition}
+\begin{proof}
+  The monoid homomorphism $i : M \to \tilde{M}$ is simply given by mapping $a$ to $[(a,0)]$. This is indeed a homomorphism since $[(a,0)] + [(b,0)] = [(a+b,0)]$.
+  Now suppose we are given $\varphi : M \to G$. Then $\tilde{\varphi} : \tilde{M} \to G$ is given by $[(a,b)] \mapsto \varphi(a) - \varphi(b)$, making the diagram commute.
+  This map is unique since for any $a \in M$, we have $\tilde{\varphi}([(a,0)]) = \varphi(a)$, and consequently $\tilde{\varphi}([(0,a)]) = -\tilde{\varphi}([(a,0)]) = - \varphi(a)$,
+  which altogether determines the map $\tilde{\varphi}$.
+\end{proof}
+
+Furthermore, any abelain group satisfying the given universal property is isomorphic to $\tilde{M}$ via a unique isomorphism.
+
+There is an alternative (but equivalent) characterization of $\tilde{M}$ via the quotienting the free group on $M$ by the monoidal relations.
+\begin{proposition}
+  Let $K(M)$ be the abelian group given by taking the free abelian group $F(M)$ on the set $M$ and quotienting
+  by all relations of the form $[a] + [b] - [a+b]$ where $a, b \in M$ and $[x]$ represents the element in $F(M)$ corresponding to the element $x \in M$.
+  Then $K(M) \cong \tilde{M}$.
+\end{proposition}
+\begin{proof}
+  We will show that $K(M)$ satisfies the universal property of $\tilde{M}$. 
+  Let $F(M)$ represent the free abelian group on the set $M$.
+  The map $i : M \to K(M)$ on $x$ is given by taking the equivalence class of the element $x$.
+  Suppose $\varphi : M \to H$ is a monoid homomorphism to an abelian group $H$. Then define $\tilde{\varphi}([a])$ as $\varphi(a)$.
+  Suppose $[a]=[b]$, then $[a] + [-b] = [0]$ so $a - b = 0$ and consequently $\varphi(a) - \varphi(b) = 0$. 
+  Thus the map $\tilde{\varphi}$ is well-defined and clearly
+  a group homomorphism. It is also unique since $\tilde{\varphi}$ is specified uniquely on the basis of $F(M)$.
+\end{proof}
+
+\begin{example}[]
+  Let $R$ be a (unital) ring satisfying the \textit{Invariant Basis Property (IBP)}. That is, $R^m \cong R^n$ implies $m = n$.
+  Then the monoid of isomorphism classes of free $R$-modules with the operation $\oplus$ is isomorphic to $\N$, the isomorphism given by the map $R^n \mapsto n$. Consequently, its group completion
+  is isomorphic to the abelian group $\Z$. \\
+\end{example}
+Note that all fields (and division rings) $F$ satisfy IBP since dimension of an $F$-module is independent of the choice of basis.
+Further, any ring $R$ with a map $R \to F$, a field or a division ring $F$ satisfies IBP. In particular, commutative rings all satisfy IBP.
+
+\begin{example}
+  Let $X$ be a topological space. Then the set $[X, \N]$ of continuous maps $X \to \N$ forms an abelian monoid
+  under pointwise addition of maps. Then the group completion of this monoid is isomorphic to the abelian group of continuous maps 
+  $X \to \Z$ denoted $[X,\Z]$.
+  If $X$ is quasicompact, this is in fact a free abelian group.
+  Notably, $[X, \N]$ also admits a commutative semiring structure via pointwise multiplication in addtion to the monoid operation.
+  This makes $[X, \Z]$ into a commutative ring. 
+\end{example}
+
+\subsection{Defining $K_0(R)$}
+Now we can define the group $K_0(R)$ as the group completion of the monoid $\mathbf{P}(R)$ consisting of finitely generated
+projective $R$-modules with the monoid operation given by $\oplus$.
+
+\begin{example}
+  Let $F$ be a field or a division ring. Then all finitely generated projective $F$-modules are free. This gives us
+  $K_0(F) \cong \Z$. More generally, for any local ring $R$, all finitely generated projective $R$-modules are free.
+  This gives us $K_0(R) \cong \Z$.
+\end{example}
+
+
+\subsection{Rank and $H_0$} 
+Recall the notion of rank of a projective module. Let $R$ be a commutative ring and $P$ be a projective $R$-module. For any prime ideal $\p$ of $R$, we can look at the local ring
+$R_\p$. Its quotient by the maximal ideal $k(\p) = R_\p/\p R_\p$ is a field and $P \otimes k(\p)$ becomes a projective $k(\p)$-module, which must be free since $k(\p)$ is a field. Denote its rank by $\text{rank}_P(\p)$.
+We call this the local rank of $P$ at $\p$.
+If $P$ has the same local rank for all prime ideals of $R$, we say $P$ is of constant rank.
+
+In general, we define $H_0(R)$ to be the ring $[Spec(R),\Z]$, the ring of all continuous maps from $Spec(R)$ to the discrete space $\Z$.
+Since $Spec(R)$ is quasicompact, it has finitely many connected components.
+Note that $H_0(R)$ is a free abelian group with a basis given by maps of the  
+We obtain a funct$rank :Spec(R) \to $
+
+Note there is an inclusion $[Spec(R),\N] \hookrightarrow \mathbf{P}(R)$ of monoids, which yields an inclusion of their corresponding
+group completions $H_0(R) \hookrightarrow K_0(R)$. This inclusion splits the rank map, and we get
+\[
+  K_0(R) \cong H_0(R) \oplus \tilde{K}_0(R)
+\]
+where $\tilde{K}_0(R)$ is the kernel of the rank map.
+
+\begin{example}
+
+\end{example}
+
+\subsection{Morita Equivalence and Invariance}
+
+Suppose we have (unital) rings $R$ and $S$ such that we have an equivalence of the respective categories of right modules:
+\begin{align*}
+  \textbf{mod-}R \leftrightharpoons\textbf{mod-}S
+\end{align*}
+Then we say that $R$ and $S$ are \textbf{Morita equivalent}.

@@ -1,0 +1,96 @@
+\documentclass[12pt]{book}
+
+% ---------- Packages ----------
+\usepackage[a4paper,margin=1.5in]{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+%\usepackage[backend=biber,style=alphabetic]{biblatex}
+\setlist{nosep}
+\linespread{1.0}  
+% ---------- Formatting ----------
+\setlength{\parskip}{0.5em}
+\setlength{\parindent}{0pt}
+\titlespacing*{\section}{0pt}{1em}{0.5em}
+\titlespacing*{\subsection}{0pt}{0.8em}{0.3em}
+
+% ---------- Theorem Environments ----------
+\newtheorem{theorem}{Theorem}
+\newtheorem{definition}{Definition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{axiom}{Axiom}
+\newtheorem{example}{Example}[section]
+
+% ---------- Macros ------------
+\newcommand{\U}{\mathcal{U}}
+\newcommand{\deq}{\equiv}
+\newcommand{\eqv}{\simeq}
+\newcommand{\id}{\mathsf{id}}
+\newcommand{\Prod}[2]{\prod_{(#1)}{#2}}
+\newcommand{\Sum}[2]{\sum_{(#1)}{#2}}
+\newcommand{\inl}{\mathsf{inl}}
+\newcommand{\inr}{\mathsf{inr}}
+\newcommand{\ind}{\mathsf{ind}}
+\newcommand{\0}{\mathbf{0}}
+\newcommand{\1}{\mathbf{1}}
+\newcommand{\2}{\mathbf{2}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\p}{\mathfrak{p}}
+\newcommand{\m}{\mathfrak{m}}
+\newcommand{\refl}{\mathsf{refl}}
+\newcommand{\W}[3]{\mathsf{W}_{(#1:#2)}#3(#1)}
+\newcommand{\w}{\W{a}{A}{B}}
+\newcommand{\Sph}{\mathbb{S}}
+\newcommand{\base}{\mathsf{base}}
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\Set}{\mathbf{Set}}
+\newcommand{\cSet}{\mathbf{cSet}}
+\newcommand{\I}{\mathbb{I}}
+\newcommand{\cube}{\mathbf{\square}}
+\newcommand{\Path}{\mathsf{Path}}
+\newcommand{\Equiv}{\mathsf{Equiv}}
+\newcommand{\fillup}{\mathord{\uparrow}}
+\newcommand{\filldown}{\mathord{\downarrow}}
+\newcommand{\Hom}{\text{Hom}}
+\makeatletter
+\DeclareRobustCommand{\sqcdot}{\mathbin{\mathpalette\morphic@sqcdot\relax}}
+\newcommand{\morphic@sqcdot}[2]{%
+  \sbox\z@{$\m@th#1\centerdot$}%
+  \ht\z@=.33333\ht\z@
+  \vcenter{\box\z@}%
+}
+\makeatother
+\makeatletter
+\makeatother
+% ---------- Title ----------
+\title{An Introduction to Higher Algebraic K-Theory}
+\author{Naveen Maurya}
+
+\begin{document}
+\maketitle
+
+\chapter{Projective Modules}
+\input{content/chapter1.tex}
+
+\chapter{The Grothendieck Group $K_0$}
+\input{content/chapter2.tex}
+
+\chapter{Groups $K_1$ and $K_2$ of a ring}
+
+\chapter{Constructions of Higher K-Theory: Quillen's + and Q} 
+\input{content/chapter4.tex}
+
+\chapter{Some Miscellaneous Computations} 
+
+% ---------- References ----------
+\nocite{*}
+\bibliographystyle{plain}
+\bibliography{references}
+
+\end{document}

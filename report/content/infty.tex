@@ -1,0 +1,46 @@
+\section{Definitions}
+
+First, we shall define the notion of an $\infty$-categories:
+
+  An $\infty$-category $X$ is the data of a collection of sets 
+\[
+    X_0, X_1, X_2, \ldots 
+\]
+  and for all $n \geq 0$,
+  maps \[\partial_n^0, \partial_n^1 : X_{n+1} \rightarrow X_n\]
+  and a graded map \\
+  \[\circ_n : X_{n+1} \times_{X_n} X_{n+1} \rightarrow X_{n+1} \] 
+  and an identity realization map $\1_n : X_n \rightarrow X_{n+1}$, which we denote as
+  $\1_n(x) := \1_x$ \\
+  such that at each $n \geq 0$, the following holds:
+  \begin{enumerate}
+    \item [(i)] Let $x, y \in X_n$ and $f \in X_{n+1}$ such that $\partial_n^0 (f) = x$ and $ \partial_n^1 (f) = y$,
+      which we here on denote as $f : x \to y$, then
+      \[ f \circ \1_x = f : y \to y\] and \[ \1_y \circ f = f : x \to x\]
+    \item [(ii)] Let $x, y, z, w \in X_n$ and $f, g, h \in X_{n+1}$ where 
+      \begin{align*}
+        f &: x \to y \\
+        g &: y \to z \\
+        h &: z \to w
+      \end{align*}
+      then we have \textit{associativity upto (coherent) homotopy}, i.e., we have $H \in X_{n+2}$ such that 
+      \[H : h \circ (g \circ f) \to (h \circ g) \circ f.\]
+      Pictorially,\\
+      {TODO: Fill in a picture here.}
+ \end{enumerate}
+
+ We denote for $x, y \in X_n$, $\Hom(x,y) := \{f \in X_{n+1} \mid f : x \to y\}$.
+ Note this is the fiber of some pullback 
+ \[(\partial_n^0)^{-1}(x) \cap (\partial_n^1)^{-1}(y) \]
+
+ From now on, we will refer to elements of $X_n$ as $n$-cells and abuse notation whenever convenient.
+
+ \begin{definition}[$\infty$-functors]
+   An $\infty$-functor of $\infty$-categories $X, Y$ will be a collection of maps $F = (F_n)$, where
+   $F_n: X_n \to Y_n$ such that the following hold at all $n \geq 0$
+   \begin{enumerate}
+     \item [(i)] Let $x,y$ be $n$-cells and $f : x \to y$ be an $n+1$-cell, then \[Ff : Fx \to Fy\] 
+     \item [(ii)] Let $x, y, z$ be $n$-cells, with $f : x \to y, g : y \to z, h : z \to w$, then
+       \[ F(g \circ f) \to F(g) \circ F(f)\] 
+   \end{enumerate}
+ \end{definition}
