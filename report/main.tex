@@ -30,7 +30,7 @@
 \newcommand{\U}{\mathcal{U}}
 \newcommand{\deq}{\equiv}
 \newcommand{\eqv}{\simeq}
-\newcommand{\id}{\mathsf{id}}
+\DeclareMathOperator*{\id}{id}
 \newcommand{\Prod}[2]{\prod_{(#1)}{#2}}
 \newcommand{\Sum}[2]{\sum_{(#1)}{#2}}
 \newcommand{\inl}{\mathsf{inl}}
@@ -75,6 +75,8 @@
 \begin{document}
 \maketitle
 
+\tableofcontents
+
 \chapter{Projective Modules}
 \input{content/chapter1.tex}
 
@@ -83,10 +85,8 @@
 
 \chapter{Groups $K_1$ and $K_2$ of a ring}
 
-\chapter{Constructions of Higher K-Theory: Quillen's + and Q} 
+\chapter{Constructions of Higher K-Theory} 
 \input{content/chapter4.tex}
-
-\chapter{Some Miscellaneous Computations} 
 
 % ---------- References ----------
 \nocite{*}

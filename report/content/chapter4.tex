@@ -1,1 +1,120 @@
-\section{Quillen's +=Q Theorem}
+
+In this chapter, we shall explore the definitions of higher $K$-theory, for which we need to state some. 
+The primary goal of higher $K$-theory is to define a `$K$-Theory space' $K(R)$ for any ring $R$.
+We then define the higher $K$-groups to be $K_n(R) = \pi_n(K(R))$, and verify 
+that this description matches with the classical theory for $n = 0, 1, 2$. 
+
+A number of approaches can be taken, all of which yield the same $K$-theory space, up to homotopy equivalence. 
+%Once we have a homotopy-theoretic description of $K$-theory, we can implement tools from Homotopy Theory such as Spectral Sequences, etc.
+%towards computations of $K$-theory.
+In Section \S1, we first recall some homotopy-theoretic notions.
+In Section \S2, we describe Quillen's $+$-construction, introduced in [].
+In Section \S4, we describe Quillen's $Q$-construction.
+Section \S5 is devoted to showing the equivalence of the $+$ and $Q$-construction for the $K$-theory of finitely generated projective modules over a ring $R$.
+
+\section{Homotopy Theory Preliminaries}
+
+\subsection{Geometric Realisation of a small category}
+Given a small category $C$, there is a way to interpret $C$ as a CW-complex (and consequently as a topological space)
+such that the following properties are fulfiled:
+
+We will note that the following homotopy-theoretic generalization of a topological group will be relevant when considering upcoming constructions.
+
+\begin{definition}[$H$-space]
+A $H$-space \footnote{The $H$ stands for Hopf} $X$ is a topological space with a binary operation $\mu : X \times X \to X$ and a distinguished element
+$e$ such that 
+\begin{itemize}
+  \item $\mu(e,e) = e$ 
+  \item $\mu(e,-) \eqv \id_X$ 
+  \item $\mu(-,e) \eqv \id_X$ 
+\end{itemize}
+\end{definition}
+Additionally, we say that a $H$-space is homotopy-associative or homotopy-commutative if those respective properties hold up to homotopy.
+A detailed description is available in [].
+
+Topological groups are trivially examples of $H$-spaces. A class of illuminating nontrivial examples come from $n$-th loop spaces $\Omega^n X$ of some based space $X$, where the multiplication is
+given by concatenation of paths.
+
+The (path) connected components of a homotopy-associative $H$-space determine a group. % One can also group-complete a $H$-space.
+
+We now describe the notion of a homtopy fiber, which is useful for organizing how homotopy groups behave across a map $f : E \to B$.
+
+\begin{definition}[Homotopy Fiber]
+Let $f : E \to B$ be a map of based spaces. The homotopy fiber $F(f)$ of this map is the homotopy-pullback of the cospan $E \to B \leftarrow PB$,
+where $PB$ is the (based) space of paths in $Y$.
+\end{definition}
+More concretely, we can define $F(f)$ to be consisting of pairs $(e,\gamma)$ where $e \in E$ and $\gamma$ is a path in $B$ starting at the basepoint such that 
+$f(e) = \gamma(1)$. We may declare $F(f)$ to have the basepoint $(*_E,*_{PB})$,
+
+The key property of the homotopy fiber is that the sequence $F(f) \to E \to B$ of based space maps which yields a long exact sequence:
+\begin{align*}
+  \cdots \to \Omega^{n+1} B \to \Omega^n &F(f) \to \Omega^n E \to \Omega^n B \to \cdots \\
+  \cdots \to & \Omega F(f) \to \Omega E \to \Omega B \to F(f) \to E \to B
+\end{align*}
+
+which in turn yields a long exact sequence of groups/pointed sets:
+\begin{align*}
+  \cdots \to \pi_{n+1} B \to &\pi_n F(f) \to \pi_n E \to \pi_n B \to \cdots \\
+  \cdots \to &\pi_1 F(f) \to \pi_1 E \to \pi_1 B \to \pi_0 F(f) \to \pi_0 E \to \pi_0 B
+\end{align*}
+
+Additionally, if $E$ and $B$ are $H$-spaces, then the last few terms respcet the induced group multiplication.
+
+\subsection{$+$-construction on a topological space}
+
+
+
+\begin{definition}
+A space $X$ is said to be acyclic if it has the homology of a point, i.e., $H_*(X,\Z) \cong H_*(*,\Z) \cong \Z$.
+\end{definition}
+
+\begin{definition}[Acyclic maps]
+Let $f : X \to Y$ be a map of based connected $CW$-complexes. We say $f$ is acyclic if the homotopy fiber $F(f)$ is acyclic, i.e., has the homology of a point. 
+\end{definition}
+Note that an acylic map induces an isomorphism on integral homology $f_* : H_*(X,\Z) \cong H_*(Y,\Z)$.
+Furthermore, we have the following result characterising acyclic maps:
+
+\begin{lemma}
+Let $X, Y$ be connected $CW$-complexes. A map $f : X \to Y$ is acyclic if and only if for every $\pi_1(Y)$-module
+$M$, it induces an isomorphism $H_*(X,M) \cong H_*(Y,M)$.
+\end{lemma}
+
+\begin{definition}[relative $+$-construction]
+Let $X$ be a based $CW$-complex and $P$ be a perfect normal subgroup of $\pi_1(X)$. 
+Then we say a based acyclic map of $CW$-complexes $f : X \to Y$ is a $+$-construction
+relative to $P$ if $P$ is the kernel of the induced map $\pi_1(X) \to \pi_1(Y)$.
+\end{definition}
+
+%Note that since $F(f)$ is acyclic, the exact sequence $\pi_1 F(f) \to \pi_1 X \to \pi_1 Y \to \pi_0 F(f)$ gives us that 
+%$\pi_1(X) \to \pi_1(Y)$ is surjective
+\begin{theorem}[Quillen]
+Let $X$ be a based $CW$-complex and $P$ be a perfect normal subgroup of $\pi_1(X)$.
+\begin{enumerate}
+  \item There exists a $+$-construction $X \to Y$ relative to $P$.
+  \item A $+$-construction $f : X \to Y$ is universal among maps which kill $P$ in the fundamental group.
+  That is, for any $g : X \to Z$ such that the image of $P$ in $\pi_1(Z)$ vanishes, we have a map $h : Y \to Z$, unique up to homotopy, such that $g = hf$. 
+  \item In particular, if $g$ is another $+$-construction relative to $P$, then there is a homotopy equivalence $h : Y \to{\sim} Z$ compatible with the maps.
+\end{enumerate}
+\end{theorem}
+
+\begin{proposition}
+Let a map $f : X \to Y$ of based spaces be acyclic. Then it preserves integral homology wrt any local coefficient system. 
+\end{proposition}
+
+A proof of this was first given by Quillen in [], and uses topological obstruction theory. A more recent exposition is available in [].
+
+Any group $G$ has a maximal perfect normal subgroup. []
+From now on, for any based $CW$-complex $X$, we will denote by $X^+$ any $+$-construction on $X$ relative to the maximal perfect subgroup $P \triangleleft \pi_1(X)$.
+
+\subsection{Explicit Construction}
+A number of explicit \emph{models} exist for the $+$-construction. Here is one of them which constructs $X^+$ by attaching $2$-cells 
+to kill the maximal perfect subgroup of $\pi_1(X)$, and then $3$-cells to recover the integral homology of $X$.
+
+\section{The $BGL(R)^+$ construction for a ring $R$}
+
+\section{$S^{-1}S$ construction on a Symmetric Monoidal Category}
+
+\section{$Q$-construction on an Exact Category}
+
+\section{Quillen's $+=Q$ Theorem}
+

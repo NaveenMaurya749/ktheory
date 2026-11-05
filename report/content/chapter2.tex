@@ -1,4 +1,5 @@
 In this chapter, we will develop the notion of the Grothendieck Group $K_0$ accross a variety of contexts. 
+First, we discuss the grothendieck group of a ring, then symmetric monoidal categories. 
 
 \section{$K_0$ of a ring}
 Let $R$ be a (unital) ring. The interesting objects of study will be finitely generated projective modules over $R$.
@@ -87,29 +88,32 @@ projective $R$-modules with the monoid operation given by $\oplus$.
   This gives us $K_0(R) \cong \Z$.
 \end{example}
 
-
-\subsection{Rank and $H_0$} 
-Recall the notion of rank of a projective module. Let $R$ be a commutative ring and $P$ be a projective $R$-module. For any prime ideal $\p$ of $R$, we can look at the local ring
-$R_\p$. Its quotient by the maximal ideal $k(\p) = R_\p/\p R_\p$ is a field and $P \otimes k(\p)$ becomes a projective $k(\p)$-module, which must be free since $k(\p)$ is a field. Denote its rank by $\text{rank}_P(\p)$.
-We call this the local rank of $P$ at $\p$.
-If $P$ has the same local rank for all prime ideals of $R$, we say $P$ is of constant rank.
-
-In general, we define $H_0(R)$ to be the ring $[Spec(R),\Z]$, the ring of all continuous maps from $Spec(R)$ to the discrete space $\Z$.
-Since $Spec(R)$ is quasicompact, it has finitely many connected components.
-Note that $H_0(R)$ is a free abelian group with a basis given by maps of the  
-We obtain a funct$rank :Spec(R) \to $
-
-Note there is an inclusion $[Spec(R),\N] \hookrightarrow \mathbf{P}(R)$ of monoids, which yields an inclusion of their corresponding
-group completions $H_0(R) \hookrightarrow K_0(R)$. This inclusion splits the rank map, and we get
-\[
-  K_0(R) \cong H_0(R) \oplus \tilde{K}_0(R)
-\]
-where $\tilde{K}_0(R)$ is the kernel of the rank map.
-
 \begin{example}
-
+  Note that finitely generated projectives over $\Z$ are free. Thus $K_0(\Z) \cong \Z$. More generally, for any ring $R$ with the IBP 
 \end{example}
 
+%\subsection{Rank and $H_0$} 
+%Recall the notion of rank of a projective module. Let $R$ be a commutative ring and $P$ be a projective $R$-module. For any prime ideal $\p$ of $R$, we can look at the local ring
+%$R_\p$. Its quotient by the maximal ideal $k(\p) = R_\p/\p R_\p$ is a field and $P \otimes k(\p)$ becomes a projective $k(\p)$-module, which must be free since $k(\p)$ is a field. Denote its rank by $\text{rank}_P(\p)$.
+%We call this the local rank of $P$ at $\p$.
+%If $P$ has the same local rank for all prime ideals of $R$, we say $P$ is of constant rank.
+%
+%In general, we define $H_0(R)$ to be the ring $[Spec(R),\Z]$, the ring of all continuous maps from $Spec(R)$ to the discrete space $\Z$.
+%Since $Spec(R)$ is quasicompact, it has finitely many connected components.
+%Note that $H_0(R)$ is a free abelian group with a basis given by maps of the  
+%We obtain a funct$rank :Spec(R) \to $
+%
+%Note there is an inclusion $[Spec(R),\N] \hookrightarrow \mathbf{P}(R)$ of monoids, which yields an inclusion of their corresponding
+%group completions $H_0(R) \hookrightarrow K_0(R)$. This inclusion splits the rank map, and we get
+%\[
+%  K_0(R) \cong H_0(R) \oplus \tilde{K}_0(R)
+%\]
+%where $\tilde{K}_0(R)$ is the kernel of the rank map.
+%
+%\begin{example}
+%
+%\end{example}
+%
 \subsection{Morita Equivalence and Invariance}
 
 Suppose we have (unital) rings $R$ and $S$ such that we have an equivalence of the respective categories of right modules:
@@ -117,3 +121,11 @@ Suppose we have (unital) rings $R$ and $S$ such that we have an equivalence of t
   \textbf{mod-}R \leftrightharpoons\textbf{mod-}S
 \end{align*}
 Then we say that $R$ and $S$ are \textbf{Morita equivalent}.
+
+A consequence of Morita Equivalence is that $R$ and $S$ yield isomorphic $K_0$ groups.
+
+\section{$K_0$ of a Symmetric Monoidal Category}
+
+%A symmetric monoidal category is, vaguely speaking, a category $\C$ with a bifunctor $\box : \C \times \C \to \C$ satisfying
+
+\section{$K_0$ of an Exact Category}
