@@ -19,23 +19,23 @@
 \titlespacing*{\subsection}{0pt}{0.8em}{0.3em}
 
 % ---------- Theorem Environments ----------
-\newtheorem{theorem}{Theorem}
-\newtheorem{definition}{Definition}
-\newtheorem{lemma}{Lemma}
-\newtheorem{proposition}{Proposition}
-\newtheorem{axiom}{Axiom}
+\newtheorem{theorem}{Theorem}[chapter]
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}[section]
 \newtheorem{example}{Example}[section]
 
 % ---------- Macros ------------
-\newcommand{\U}{\mathcal{U}}
-\newcommand{\deq}{\equiv}
-\newcommand{\eqv}{\simeq}
+\newcommand{\Cat}{\mathbf{Cat}}
+\newcommand{\Sets}{\mathbf{Sets}}
+\newcommand{\Top}{\mathbf{Top}}
+\newcommand{\Del}{\mathbf{\Delta}}
+\newcommand{\sSet}{\mathbf{sSet}}
 \DeclareMathOperator*{\id}{id}
-\newcommand{\Prod}[2]{\prod_{(#1)}{#2}}
-\newcommand{\Sum}[2]{\sum_{(#1)}{#2}}
-\newcommand{\inl}{\mathsf{inl}}
-\newcommand{\inr}{\mathsf{inr}}
-\newcommand{\ind}{\mathsf{ind}}
 \newcommand{\0}{\mathbf{0}}
 \newcommand{\1}{\mathbf{1}}
 \newcommand{\2}{\mathbf{2}}
@@ -44,17 +44,7 @@
 \newcommand{\p}{\mathfrak{p}}
 \newcommand{\m}{\mathfrak{m}}
 \newcommand{\refl}{\mathsf{refl}}
-\newcommand{\W}[3]{\mathsf{W}_{(#1:#2)}#3(#1)}
-\newcommand{\w}{\W{a}{A}{B}}
-\newcommand{\Sph}{\mathbb{S}}
-\newcommand{\base}{\mathsf{base}}
-\newcommand{\A}{\mathbb{A}}
-\newcommand{\Set}{\mathbf{Set}}
-\newcommand{\cSet}{\mathbf{cSet}}
-\newcommand{\I}{\mathbb{I}}
-\newcommand{\cube}{\mathbf{\square}}
-\newcommand{\Path}{\mathsf{Path}}
-\newcommand{\Equiv}{\mathsf{Equiv}}
+\newcommand{\eqv}{\simeq}
 \newcommand{\fillup}{\mathord{\uparrow}}
 \newcommand{\filldown}{\mathord{\downarrow}}
 \newcommand{\Hom}{\text{Hom}}

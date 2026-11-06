@@ -1,33 +1,134 @@
-
-In this chapter, we shall explore the definitions of higher $K$-theory, for which we need to state some. 
-The primary goal of higher $K$-theory is to define a `$K$-Theory space' $K(R)$ for any ring $R$.
-We then define the higher $K$-groups to be $K_n(R) = \pi_n(K(R))$, and verify 
+In this chapter, we shall explore the definitions of higher $K$-theory.
+The primary goal of higher $K$-theory is to (functorially) define a `$K$-Theory space' $K(R)$ associated to a unital ring $R$.
+We then define the higher $K$-groups to be $K_n(R) = \pi_nK(R)$, and verify 
 that this description matches with the classical theory for $n = 0, 1, 2$. 
 
-A number of approaches can be taken, all of which yield the same $K$-theory space, up to homotopy equivalence. 
+A number of approaches can be taken in different contexts, and we have some results showing that in 
+some restricted contexts, these various constructions are equivalent, i.e., yield homotopy-equivalent $K$-theory spaces.
 %Once we have a homotopy-theoretic description of $K$-theory, we can implement tools from Homotopy Theory such as Spectral Sequences, etc.
 %towards computations of $K$-theory.
+
 In Section \S1, we first recall some homotopy-theoretic notions.
-In Section \S2, we describe Quillen's $+$-construction, introduced in [].
-In Section \S4, we describe Quillen's $Q$-construction.
-Section \S5 is devoted to showing the equivalence of the $+$ and $Q$-construction for the $K$-theory of finitely generated projective modules over a ring $R$.
+In Section \S2, we describe the $+$-construction, introduced in [] by <> and used by Quillen in [] to describe higher $K$-groups.
+Section \S3 describes higher $K$-groups of a ring using the $+$-construction.
+In Section \S4, we describe the $S^{-1}S$ construction on a symmetric monoidal category,
+and show its equivalence with the $+$-construction for $(\mathbf{P}(R), \oplus)$.
+In Section \S4, we describe Quillen's $Q$-construction for exact categories. 
+Section \S5 is devoted to the $+=Q$ theorem, which implies equivalence of the $+$ and $Q$-construction for $\mathbf{P}(R)$.
 
 \section{Homotopy Theory Preliminaries}
 
-\subsection{Geometric Realisation of a small category}
-Given a small category $C$, there is a way to interpret $C$ as a CW-complex (and consequently as a topological space)
-such that the following properties are fulfiled:
+A based space is a topological space $X$ along with a distinguished basepoint which we denote $*_X$.
+A map of based spaces $X \to Y$ is a map of the underlying topological spaces which preserves basepoints.
 
+We can functorially associate homotopy groups $\pi_n$ to a based space $X$, denoted $\pi_n(X)$. We assume familiarity with the definitions of homotopy and homology groups. 
+$H_*(X;M)$ will refer to the singular homology of $X$ with coefficients in some abelian group $M$, or alternatively local coefficients, i.e. $M$ being a $\pi_1(X)$-module.
+When $M = \Z$, this is referred to as integral homology. See [] for a detailed treatment.
+
+A CW complex (or cellular complex) $X$ is a colimit of a filtration of $n$-skeleta, denoted $\emptyset = X_{-1} \subseteq X_0 \subseteq X_1 \subseteq X_2 \subseteq \cdots$
+where $X_0$ is a discrete set of points and $X_{n}$ is a pushout of $X_{n-1}$ via a disjoint union $\cup_\alpha e_\alpha$ of attaching maps $e_\alpha : S^{n-1}_\alpha \to X_{n-1}$ and
+the disjoint union $\cup_\alpha j_\alpha$ of inclusions $j_\alpha : S^{n-1}_\alpha \to D^{n}_\alpha$. (Note $S^{-1}$ is taken to be $\emptyset$.)
+
+That is, $X_{n} = X_{n-1} \cup_{S^{n-1}_\alpha} D^{n}_\alpha$. 
+The images of the interiors of the disks $D^n_\alpha$ in $X_n$ are called $n$-cells.
+Note that $0$-cells correspond to a set of points, $1$-cells correspond to line segments, $2$-cells to disks, and so on.
+
+The colimit carries the weak topology.
+The homology of CW complexes is particularly tractable. See [Hatcher] for a detailed treatment.
+
+\subsection{Geometric Realisation of a small category}
+Given a small category $C$, there is a way to interpret $C$ as a CW complex by the following procedure:
+
+\begin{definition}[Simplicial sets]
+A simplicial set $X$ is a contravariant functor $\Del \to \Sets$, where $\Del$ is the simplex
+category consisting of objects $\mathbf n = \{0,1, \ldots, n-1\}$ and morphisms $\mathbf i \to \mathbf j$ given by weakly-order preserving maps.
+Or alternatively, a sequence of sets $X_0, X_1, X_2, \ldots$ with face maps $\partial^n_i : X_n \to X_{n-1}$ and degeneracy maps $\sigma^n_j : X_n \to X_{n+1}$ subject to certain identities $(0 \leq i,j, \leq n)$.
+\end{definition}
+The category of simplicial sets is denoted $\sSet$. It is clear $\sSet$ is the functor category $[\Del^{\mathord{op}}, \Sets]$.
+
+\begin{example}
+The category $\Delta$\footnote{not identical to $\Del$} of standard $n$-simplices $\Delta^n$ with morphisms being the standard inclusion maps $\Delta^i \to \Delta^j$ for $0 \leq i \leq j$
+gives a simplicial set by $\mathbf n \to \Delta^n$ and $f : \mathbf i \to \mathbf j$ associated to $\Delta^i \to \Delta^j$.
+In fact, this is an isomorphism of categories $\Phi : \Del \cong \Delta$.
+\end{example}
+
+\begin{example}
+Any space $X$ determines a simplicial set by the representable functor $\Top(\Phi(-),X)$.
+This construction is clearly a (covariant) functor $S : \Top \to \sSet$. It is called the \emph{singular functor}.
+\end{example}
+
+A simplicial set $X$ may be functorially turned into a topological space, and this functor is called Geometric Realization.
+\begin{proposition}[Geometric Realization]
+There exists a functor $|-| : \sSet \to \Top$ which is left-adjoint to the singular functor. 
+\[
+\Top(|X|,Y) \cong \sSet(X, SY)
+\]
+naturally in $X$ and $Y$.
+\end{proposition}
+We can define $|-|$ to be the functor taking $X$ to the coend $\int_{\mathbf n \in \Del} X_n \times \Delta^n$ or equivalently,
+the colimit $\varinjlim\limits_{\Delta^n \to X} \Delta^n$ in the slice category $\Delta \downarrow X$.
+The result follows due to Yoneda's Lemma. See [Maclane].
+Furthermore, $|X|$ has a natural CW structure induced by CW structures on $\Delta^n$. 
+
+\begin{definition}[Nerve of a small category]
+Let $C$ be a small category. Then its nerve $NC$ is a simplicial set defined by
+taking the $n$-simplices as functors $c : \mathbf{n} \to C$, i.e. diagrams of the form 
+\begin{align*}
+  c_0 \to c_1 \to \cdots \to c_{n-1} 
+\end{align*}
+for objects $c_0, c_1, \ldots, c_{n-1}$ in $C$.
+The $i$-th face map $\partial^n_i(c)$ on this simplex is obtained by deleting $c_i$ in the evident way.
+Similarly, the $j$-th degeneracy map $\sigma^n_j(c)$ is obtained by replacing $c_j$ by $c_j \to c_j$ in the obvious manner.
+\end{definition}
+
+We define the \emph{classifying space} of a small category $C$, denoted $BC$, as the geometric realization of $NC$.
+\begin{definition}[Classifying space of a small category]
+  $BC := |NC|$.
+\end{definition}
+
+\begin{example}
+For the categories $\mathbf n$, the geometric realization $B \mathbf n = \Phi \mathbf n$.
+\end{example}
+Furthermore, for any small category $C$, $BC$ is the colimit (with the weak topology) of 
+the directed system of the functors $B \mathbf n \to BC$ coming from $\mathbf n \to C$ and the   
+morphisms coming from factorizations $\mathbf i \to \mathbf n \to C$.
+
+\begin{proposition}
+A functor $F : C \to D$ of small categories determines a cellular map $BF : BC \to BD$. Further,
+$B(\id_C) : BC \to BC$ is the identity map on $BC$, and for functors $F : C \to D, G : D \to E$, we have
+$B(G \circ F) = BG \circ BF$.
+\end{proposition}
+\begin{proof}
+Due to the functoriality of geometric realization on simplicial sets, it suffices to show that
+the association $N : \Cat \to \sSet$ is functorial. But this follows directly from axioms of a category.
+\end{proof}
+
+Thus we have a functor $B : \Cat \to \Top$.
+%\begin{proposition}
+%Sucomplexes of $BC$ are in one-to-one correspondence with subcategories of $C$.
+%\end{proposition}
+
+\begin{example}
+A group $G$ may be interpreted as a small category with a single object and all invertible arrows.
+We call $BG$ the classifying space of the group $G$.
+\end{example}
+
+\begin{proposition}
+The fundamental group $\pi_1(BG)$ is naturally isomorphic to $G$. 
+%So we have $H_1(BG;\Z) = 0$ if and only if $G$ is perfect.
+\end{proposition}
+
+\subsection{More Homotopy Theory}
 We will note that the following homotopy-theoretic generalization of a topological group will be relevant when considering upcoming constructions.
 
 \begin{definition}[$H$-space]
 A $H$-space \footnote{The $H$ stands for Hopf} $X$ is a topological space with a binary operation $\mu : X \times X \to X$ and a distinguished element
 $e$ such that 
-\begin{itemize}
+\begin{enumerate}
   \item $\mu(e,e) = e$ 
   \item $\mu(e,-) \eqv \id_X$ 
   \item $\mu(-,e) \eqv \id_X$ 
-\end{itemize}
+\end{enumerate}
 \end{definition}
 Additionally, we say that a $H$-space is homotopy-associative or homotopy-commutative if those respective properties hold up to homotopy.
 A detailed description is available in [].
@@ -35,16 +136,16 @@ A detailed description is available in [].
 Topological groups are trivially examples of $H$-spaces. A class of illuminating nontrivial examples come from $n$-th loop spaces $\Omega^n X$ of some based space $X$, where the multiplication is
 given by concatenation of paths.
 
-The (path) connected components of a homotopy-associative $H$-space determine a group. % One can also group-complete a $H$-space.
+The (path) connected components of a homotopy-associative $H$-space determine a monoid. % One can also group-complete a $H$-space.
 
-We now describe the notion of a homtopy fiber, which is useful for organizing how homotopy groups behave across a map $f : E \to B$.
+We now describe the important notion of a \emph{homotopy fiber}, which is useful for organizing how homotopy groups behave across a map $f : E \to B$.
 
 \begin{definition}[Homotopy Fiber]
 Let $f : E \to B$ be a map of based spaces. The homotopy fiber $F(f)$ of this map is the homotopy-pullback of the cospan $E \to B \leftarrow PB$,
 where $PB$ is the (based) space of paths in $Y$.
 \end{definition}
 More concretely, we can define $F(f)$ to be consisting of pairs $(e,\gamma)$ where $e \in E$ and $\gamma$ is a path in $B$ starting at the basepoint such that 
-$f(e) = \gamma(1)$. We may declare $F(f)$ to have the basepoint $(*_E,*_{PB})$,
+$f(e) = \gamma(1)$. $F(f)$ inherits the subspace topology from $E \times PB$ where $PB$ itself carries the compact-open topology. We may declare $F(f)$ to have the basepoint $(*_E,*_{PB})$.
 
 The key property of the homotopy fiber is that the sequence $F(f) \to E \to B$ of based space maps which yields a long exact sequence:
 \begin{align*}
@@ -58,37 +159,54 @@ which in turn yields a long exact sequence of groups/pointed sets:
   \cdots \to &\pi_1 F(f) \to \pi_1 E \to \pi_1 B \to \pi_0 F(f) \to \pi_0 E \to \pi_0 B
 \end{align*}
 
-Additionally, if $E$ and $B$ are $H$-spaces, then the last few terms respcet the induced group multiplication.
+Any other such sequence $F \to E \to B$ which results in the evident map $F \to F(f)$ (use $*_{PB}$ in the image) being a homotopy equivalence,
+is called a \emph{homotopy fibration sequence}, and consequently also yields such a long exact sequence.
 
-\subsection{$+$-construction on a topological space}
+If $f : E \to B$ were a homotopy equivalence, then the homotopy fiber $F(f)$ is weakly contractible, i.e.,
+it has the homotopy groups of a point, $\pi_*F(f) \cong \pi_*(\star)$.
+If $E$ and $B$ have homotopy type of CW complexes, then so is $F(f)$ and by Whitehead's Theorem [], weak homotopy equivalence implies homotopy equivalence.
 
+Conversely, if the fiber $F(f)$ is contractible, then $f$ is a weak homotopy equivalence, i.e., the induced maps $\pi_n(E) \to \pi_n(B)$ are isomorphisms.
+If $E$ and $B$ have homotopy type of CW complexes, then $f$ is a homotopy equivalence.
 
+\subsection{$+$-construction on a connected CW complex}
+
+The $+$-construction, devised by <> in [], is a universal way to kill a perfect normal subgroup of the fundamental group of a connected 
+CW complex, while preserving homology theory. 
+The discussion of the $+$-construction fits into the framework of acyclic maps, which we explore here.
 
 \begin{definition}
-A space $X$ is said to be acyclic if it has the homology of a point, i.e., $H_*(X,\Z) \cong H_*(*,\Z) \cong \Z$.
+A space $X$ is said to be acyclic if it has the homology of a point, i.e., $H_*(X;\Z) \cong H_*(\star;\Z) = \underline{\Z}$.
 \end{definition}
+In particular, contractible spaces are acyclic. Acyclic spaces serve an analogous purpose to homology as contractible spaces do to homotopy.
 
 \begin{definition}[Acyclic maps]
-Let $f : X \to Y$ be a map of based connected $CW$-complexes. We say $f$ is acyclic if the homotopy fiber $F(f)$ is acyclic, i.e., has the homology of a point. 
+Let $f : X \to Y$ be a map of based connected CW complexes. We say $f$ is acyclic if the homotopy fiber $F(f)$ is acyclic, i.e., has the homology of a point. 
 \end{definition}
-Note that an acylic map induces an isomorphism on integral homology $f_* : H_*(X,\Z) \cong H_*(Y,\Z)$.
+In particular, a homotopy equivalence is acyclic since the former implies that the homotopy fiber is contractible.
+Note an acyclic map induces isomorphisms on integral homology $f_* : H_*(X;\Z) \cong H_*(Y;\Z)$.
 Furthermore, we have the following result characterising acyclic maps:
 
-\begin{lemma}
-Let $X, Y$ be connected $CW$-complexes. A map $f : X \to Y$ is acyclic if and only if for every $\pi_1(Y)$-module
-$M$, it induces an isomorphism $H_*(X,M) \cong H_*(Y,M)$.
+\begin{lemma}\label{lemma:acyclic}
+Let $X, Y$ be based connected CW complexes. A map $f : X \to Y$ is acyclic if and only if for every $\pi_1(Y)$-module
+$M$, it induces an isomorphism $H_*(X;M) \cong H_*(Y;M)$.
 \end{lemma}
+The proof for this uses Serre Spectral sequences, which we skip and refer the reader to [Weibel].
 
 \begin{definition}[relative $+$-construction]
-Let $X$ be a based $CW$-complex and $P$ be a perfect normal subgroup of $\pi_1(X)$. 
+Let $X$ be a based connected CW complex and $P$ be a perfect normal subgroup of $\pi_1(X)$. 
 Then we say a based acyclic map of $CW$-complexes $f : X \to Y$ is a $+$-construction
 relative to $P$ if $P$ is the kernel of the induced map $\pi_1(X) \to \pi_1(Y)$.
 \end{definition}
 
+Since $f$ was assumed to be acyclic, we can deduce from the exact sequence $\pi_1 F(f) \to \pi_1(X) \to \pi_1(Y) \to \pi_0 F(f)$ that
+the map $\pi_1(X) \to \pi_1(Y)$ is onto. (because $\pi_0 F(f) = \{\star\}$)
+And $\pi_1(Y) \cong \pi_1(X)/P$.
+
 %Note that since $F(f)$ is acyclic, the exact sequence $\pi_1 F(f) \to \pi_1 X \to \pi_1 Y \to \pi_0 F(f)$ gives us that 
 %$\pi_1(X) \to \pi_1(Y)$ is surjective
-\begin{theorem}[Quillen]
-Let $X$ be a based $CW$-complex and $P$ be a perfect normal subgroup of $\pi_1(X)$.
+\begin{theorem}[Quillen]\label{thm:plusexists}
+Let $X$ be a based connected CW complex and $P$ be a perfect normal subgroup of $\pi_1(X)$.
 \begin{enumerate}
   \item There exists a $+$-construction $X \to Y$ relative to $P$.
   \item A $+$-construction $f : X \to Y$ is universal among maps which kill $P$ in the fundamental group.
@@ -96,21 +214,142 @@ Let $X$ be a based $CW$-complex and $P$ be a perfect normal subgroup of $\pi_1(X
   \item In particular, if $g$ is another $+$-construction relative to $P$, then there is a homotopy equivalence $h : Y \to{\sim} Z$ compatible with the maps.
 \end{enumerate}
 \end{theorem}
+The proof of this uses topological obstruction theory. We prove $1$ in \S\ref{ss:construction} and refer
+the reader to [Berrick] for 2 and 3.
 
-\begin{proposition}
-Let a map $f : X \to Y$ of based spaces be acyclic. Then it preserves integral homology wrt any local coefficient system. 
-\end{proposition}
+\begin{remark}
+Any group $G$ has a maximal perfect normal subgroup, which we call the \emph{perfect radical}. In fact, it is the subgroup generated by all perfect normal subgroups,
+hence their maximum.
+From now on, for any based CW complex $X$, we will denote by $X^+$ any $+$-construction on $X$ relative to the perfect radical $P \triangleleft \pi_1(X)$.
+\end{remark}
 
-A proof of this was first given by Quillen in [], and uses topological obstruction theory. A more recent exposition is available in [].
-
-Any group $G$ has a maximal perfect normal subgroup. []
-From now on, for any based $CW$-complex $X$, we will denote by $X^+$ any $+$-construction on $X$ relative to the maximal perfect subgroup $P \triangleleft \pi_1(X)$.
-
-\subsection{Explicit Construction}
+\subsection{Explicit Construction} \label{ss:construction}
 A number of explicit \emph{models} exist for the $+$-construction. Here is one of them which constructs $X^+$ by attaching $2$-cells 
-to kill the maximal perfect subgroup of $\pi_1(X)$, and then $3$-cells to recover the integral homology of $X$.
+to kill the maximal perfect subgroup of $\pi_1(X)$, and then $3$-cells to recover the integral homology of $X$, making sure
+that the inclusion $X \hookrightarrow X^+$ is acyclic.
+We refer the reader to [Gersten] and [Suslin] for a variety of constructions. Here, we present a construction due to [Berrick].
+We will describe more models for $K$-theory in Sections \S3 and \S4.
+
+\subsubsection*{Construction}
+Let $X$ be a connected CW complex with a perfect normal subgroup $P$ of the fundamental group $\pi_1(X)$.
+Identify the $1$-cells in $X$ corresponding to of $P$ as $e^1_p$ for each $p \in P$. 
+Now construct a pushout $Y$ by attaching disks $D^2_p$ with the boundary $S^2_p$ along every $e^1_p$.
+Call these new cells $e^2_p$.
+
+That is, $X'$ is the pushout of the diagram 
+\[
+\begin{tikzcd}%[column sep=large]
+  \coprod\limits_{p \in P} S^1_{p} \arrow[r, hook] \arrow[d] & \coprod\limits_{p \in P} D^2_{p} \arrow[d] \\
+  X \arrow[r, hook] & Y
+\end{tikzcd}
+\]
+
+Using the van-Kampen Theorem, we have the pushout through $\pi_1$ in $\mathbf{Grp}$,
+which gives us
+  $\pi_1(Y) = \pi_1(X) *_{P} 1
+         = \pi_1(X)/P$.
+         (amalgamated product)
+
+Consequently, $H_1$ is the abelianization. Since $P$ is perfect, it is killed by abelianization and we have
+$ H_1(Y) = H_1(X)$.
+
+So we can choose  
+Consider the pair $(Y,X)$. Since only $2$-cells were attached, the homology of the pair is
+\[
+H_2(Y,X) = \bigoplus_{[e^2_p]} \Z
+\]
+and $0$ elsewhere.
+We wish to cleverly attach $3$-cells to kill relative homology without affecting $H_3$.
+
+Consider the long exact sequence of the pair $(Y,X)$
+\begin{align*}
+  \cdots \to H_{n+1}(Y,X) \to H_{n}(X) &\to H_n(Y) \to H_n(Y,X) \to \cdots 
+\end{align*}
+
+At $n=1$, since the map $H_1(X) \to H_1(Y)$ is an isomorphism, we have that $H_2(Y,X) \rightarrow{} H_1(X)$ is $0$.
+Consequently, the map $H_2(Y) \to H_2(Y,X)$ is onto.
+We can lift each representative in $H_2(Y,X)$ to a representative in $H_2(Y)$, say $\sigma_p$ for each class $[e^2_p]$.
+
+Note each $\sigma_p$ is represented by a map $h_p : S^2_p \to Y$.
+Now attach $3$-cells $e^3_p$ corresponding to each $\sigma_p$ along the maps $h_p : S^2_p \to Y$.
+
+This yields another pushout which we call $Z$
+\[
+  Z = Y \cup \bigcup\limits_{[e^2_p]} e^3_p 
+  \]
+
+A triple $X \subseteq Y \subseteq Z$ induces a long exact sequence in relative homology
+\begin{align*}
+  \cdots H_{n+1}(Z,Y) \to H_{n}(Y,X) \to H_{n}(Z,X) &\to H_n(Z,Y)\to \cdots 
+\end{align*}
+
+At $n=1$, since $H_2(Y,X) = 0$ and $H_0(Z,Y) = 0$, this gives us
+\begin{align*}
+  \cdots \to 0 \to H_{1}(Z,X) \to\cong H_1(Z,Y) \to 0 \to \cdots 
+\end{align*}
+
+Similarly, for $n \geq 4$, since $H_{n+1}(Z,Y) = 0$ and $H_{n-1}(Y,X) = 0$, we get
+\begin{align*}
+  \cdots \to 0 \to H_{n}(Z,X) \to\cong H_n(Z,Y) \to 0 \to \cdots 
+\end{align*}
+
+So we conclude $H_n(Z,X) \cong H_n(Z,Y) = 0$ for $n \neq 1,2,3$.
+
+The only nontrivial terms in the sequence that remain are 
+\begin{align*}
+  \cdots \to 0 \to H_3(Z,X) \to H_3(Z,Y) \to H_2(Y,X) \to  0 \to \cdots 
+\end{align*}
+
+But $H_3(Z,Y)$ and $H_2(Y,X)$ are computable precisely due to construction.
+$Z$ was constructed so as to kill  
+\[
+H_3(Z,Y) = \bigoplus_{[\sigma_p]} \Z
+\]
+which is isomorphic via the evident maps to $H_2(Y,X) = \bigoplus_{[e_p]} \Z$.
+
+So finally, we have $H_3(Z,X) = 0$, and altogether $H_n(Z,X) = 0$ for all $n$. 
+Consequently, in the long exact sequence of the pair $(Z,X)$, we get
+\begin{align*}
+  \cdots \to H_{n+1}(Z,X) \to H_n(X) \to H_n(Z) \to H_n(Z,X) \to \cdots 
+\end{align*}
+which gives us that $H_n(X) \cong H_n(Z)$ induced via the inclusions are isomorphisms for all $n$.
+
+It is clear that $P$ is the kernel of the induced map $\pi_1(X) \to \pi_1(Y)$.
 
 \section{The $BGL(R)^+$ construction for a ring $R$}
+
+We apply the $+$-construction on the classifying space $BGL(R)$ of the stable general linear group over $R$.
+The maximal perfect subgroup of $GL(R) = \pi_1BGL(R)$ is the stable group of elementary matrices, $E(R)$.
+
+\begin{theorem}
+With this definition of $BGL(R)^+$, we obtain:
+\begin{enumerate}
+\item $\pi_1BGL(R)^+ \cong K_1(R)$ with the kernel of the induced map $GL (R) = \pi_1BGL(R) \to \pi_1BGL(R)^+$ being $E(R)$.
+\item We have induced isomoprhisms $H_*(BGL(R);M) \cong H_*(BGL(R)^+;M)$ for every $K_1(R)$-module $M$.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+Since $E(R)$ is the maximal perfect normal subgroup of $GL(R)$, 1 follows immediately from Theorem \ref{thm:plusexists}. 2 follows from the characterization of acyclic maps in Lemma \ref{lemma:acyclic}. 
+\end{proof}
+
+Due to Theorem \ref{thm:plusexists}, $BGL^+(R)$ is uniquely defined up to homotopy equivalence via a canonical equivalence.
+Consequently, we may define $K_n(R) = \pi_n BGL(R)^+$ for $n \geq 1$. It remains to verify that this agrees with the classical theory for $n = 2$.
+
+\begin{proposition}
+[Finish this]
+\end{proposition}
+
+\begin{corollary}
+We have $\pi_2(BGL(R))^+ \cong H_2(E(R);\Z) \cong \ker(St(R) \to E(R))$, and thus our definition matches with the classical theory. 
+\end{corollary}
+
+There is a recognition criteria for $+$-constructions of $BGL(R)$ in terms of homology and $H$-spaces, due to Quillen.
+[Finish this]
+
+\begin{proposition}
+$BGL(R)^+$ is a homotopy-associative $H$-space.
+\end{proposition}
+
 
 \section{$S^{-1}S$ construction on a Symmetric Monoidal Category}
 
