@@ -1,10 +1,12 @@
 In this chapter, we shall explore the definitions of higher $K$-theory.
 The primary goal of higher $K$-theory is to (functorially) define a `$K$-Theory space' $K(R)$ associated to a unital ring $R$.
 We then define the higher $K$-groups to be $K_n(R) = \pi_nK(R)$, and verify 
-that this description matches with the classical theory for $n = 0, 1, 2$. 
+that this description matches with the classical theory for $n = 0, 1, 2$.
 
 A number of approaches can be taken in different contexts, and we have some results showing that in 
 some restricted contexts, these various constructions are equivalent, i.e., yield homotopy-equivalent $K$-theory spaces.
+
+Finally, this allows us to define and relate the higher $K$-theory of finitely generated projective modules over a ring, among other applications. 
 %Once we have a homotopy-theoretic description of $K$-theory, we can implement tools from Homotopy Theory such as Spectral Sequences, etc.
 %towards computations of $K$-theory.
 
@@ -253,7 +255,6 @@ which gives us
 Consequently, $H_1$ is the abelianization. Since $P$ is perfect, it is killed by abelianization and we have
 $ H_1(Y) = H_1(X)$.
 
-So we can choose  
 Consider the pair $(Y,X)$. Since only $2$-cells were attached, the homology of the pair is
 \[
 H_2(Y,X) = \bigoplus_{[e^2_p]} \Z
@@ -316,11 +317,16 @@ which gives us that $H_n(X) \cong H_n(Z)$ induced via the inclusions are isomorp
 
 It is clear that $P$ is the kernel of the induced map $\pi_1(X) \to \pi_1(Y)$.
 This concludes the result that the stated construction preserves integral homology. 
+
+%To extend this to any $\pi_1(Z)$ module $M$, we need to lift the problem to their universal covers.
+%Let $\widetilde X \to X$ be the universal cover of $X$.
+
 If this result were to extend to local coefficient systems, this would mean that the map $X \to Z$ is acyclic 
 and forms a model for $X^+$. We do not pursue the full proof here and instead refer the reader to [Rosenberg].
+Indeed, there is an alternate result in Proposition \ref{prop:acyclic_H_space} which shows that what we have proven suffices
+for the case we are interested in, $BGL(R)^+$, which is what we shall discuss now.
 
 \section{The $BGL(R)^+$ construction for a ring $R$}
-
 We apply the $+$-construction on the classifying space $BGL(R)$ of the stable general linear group over $R$.
 The maximal perfect subgroup of $GL(R) = \pi_1BGL(R)$ is the stable group of elementary matrices, $E(R)$.
 
@@ -336,27 +342,317 @@ Since $E(R)$ is the maximal perfect normal subgroup of $GL(R)$, 1 follows immedi
 \end{proof}
 
 Due to Theorem \ref{thm:plusexists}, $BGL^+(R)$ is uniquely defined up to homotopy equivalence via a canonical equivalence.
-Consequently, we may define $K_n(R) = \pi_n BGL(R)^+$ for $n \geq 1$. It remains to verify that this agrees with the classical theory for $n = 2$.
+Consequently, we may define $K_n(R) = \pi_n BGL(R)^+$ for $n \geq 1$. 
+It is obvious that $K_1(R)$ defined here matches the description in Chapter 3.
+It remains to verify that this agrees with the classical theory for $n = 2$.
 
 \begin{proposition}
-[Finish this]
+Let $P$ be a perfect normal subgroup of $G$ with a $+$-construction $f : BG \to BG^+$ relative to $P$.
+Let $F(f)$ be the homotopy fiber of $f$. Then $\pi_1F(f)$ is the universal central extension of $P$, and consequently $\pi_2 (BG^+) \cong H_2(P;\Z)$. 
 \end{proposition}
+\begin{proof}
+We have the fibration long exact sequence
+\[
+  \cdots \to \pi_2(BG) \to \pi_2(BG^+) \to \pi_1 F(f) \to G \to G/P \to 1
+\]
+Since $BG$ is an Eilenberg-Maclane space $K(G,1)$, we have $\pi_2(BG) = 0$. 
+So $\pi_2(BG^+)$ injects into $\pi_1F(f)$, which in turns surjects onto the kernel of $G \to G/P$ which is $P$.
+Since $\pi_2(BG^+)$ is abelian, it must inject into the center of $\pi_1 F(f)$.
+This tells us that $\pi_1F(f) \to P$ is a central extension.
+Since $f$ is acylic, we have $\pi_1 F(f)$ is perfect and so $H_2(\pi_1 F(f), \Z) = 0$.
+By the Recognition Theorem [Chapter 3], we have that $\pi_1F(f)$ is the universal central extension of $P$.
+Consequently, the kernel $\pi_2(BG^+)$ is given by $H_2(P;\Z)$.
+
+\end{proof}
 
 \begin{corollary}
-We have $\pi_2(BGL(R))^+ \cong H_2(E(R);\Z) \cong \ker(St(R) \to E(R))$, and thus our definition matches with the classical theory. 
+We have $\pi_2(BGL(R))^+ \cong H_2(E(R);\Z)$, and thus our definition matches with the classical theory
+since $H_2(E(R);\Z) \cong K_2(R)$ from Chapter 3. 
 \end{corollary}
 
-There is a recognition criteria for $+$-constructions of $BGL(R)$ in terms of homology and $H$-spaces, due to Quillen.
-[Finish this]
+However, at this point, it is not clear that the associations $R \mapsto BGL(R)^+$ or $R \mapsto K_n(R)$ are functorial.
+This invites some discussion.
 
+\subsection{Functoriality of the $BGL(R)^+$-construction}
+Apart from the upcoming models via $S^{-1}S$ and $Q$-constructions, we can make the following argument to show that
+the constructions of $BGL(R)^+$ can be performed functorially.
+
+We can first define $BGL(\Z)^+$ and take a homotopy pushout (using the mapping cylinder) via the canonical map $\Z \to R$ which induces $BGL(\Z) \to BGL(R)$.
+Note that the homotopy pushout 
+\[
+\begin{tikzcd}
+  BGL(\Z) \arrow[r] \arrow[d] & BGL(\Z)^+ \arrow[d] \\
+  BGL(R) \arrow[r] & BGL(R)^+
+\end{tikzcd}
+\]
+is a plus construction for $BGL(R)$.
+
+\subsection{$H$-Space Properties of $BGL(R)^+$}
+
+It's not hard to see that we can put a $H$-space structure on $BGL(R)^+$. 
 \begin{proposition}
 $BGL(R)^+$ is a homotopy-associative $H$-space.
 \end{proposition}
+\begin{proof}
+We have the group map $\oplus : GL_m(R) \times GL_n(R) \to GL_{m+n}(R) \subset GL(R)$ 
+which induces $BGL_m(R) \times BGL_n(R) \to BGL(R)$. 
+Since we have show that the plus construction can be taken to be functorial,
+we have maps \[(BGL_m(R) \times BGL_n(R))^+ \to BGL(R)^+\].
+[Finish this]
+\end{proof}
+
+There is a recognition criteria for $+$-constructions of $BGL(R)$ in terms of homology and $H$-spaces, due to Quillen.
+The proof again uses obstruction theory. See [Gersten].
+
+\begin{theorem}
+The plus construction $i : BGL(R) \to BGL(R)^+$ is universal for maps into $H$-spaces. That is, for any map
+$f : BGL(R) \to H$ for some $H$-space $H$, we have a map $g : BGL(R)^+ \to H$ so that $f = g i$,
+such that $g$ is unique up to weak homotopy, i.e. the induced maps $\pi_n(BGL(R)^+) \to \pi_n(H)$ is independent of $g$.
+\end{theorem}
+
+\begin{proposition}\label{prop:acyclic_H_space}
+If further $f_* : H_*(BGL(R);\Z) \xlongrightarrow{\cong} H_*(H;\Z)$ is an isomorphism, then $f$ is acyclic
+and $g$ is a homotopy equivance.
+\end{proposition}
+\begin{proof}
+It suffices to prove that $f$ is acyclic.
+\end{proof}
+
+\section{$S^{-1}S$ construction}
+For a symmetric monoidal category $(S, \square)$, the construction of Chapter 2 for $K_0$ may be extended to 
+a $K$-theory space $K^\square(S)$ by constructing an appropriate group-completion of $S$ with respect to the monoidal operation $\square$.
+
+Note that the geometric realization of a symmetric monoidal category is a homotopy-associative homotopy-commutative $H$-space
+with the multiplication coming from the monoidal product $\square$. This is because []  
+We wish to construct a symmetric monoidal category $S^{-1}S$ which describes a ``group completion" of $BS$ so as to make $BS^{-1}S$ be a group-like $H$-space.
+[Grayson]
+
+But first, for either of $BS$ or $BS^{-1}S$ to be interesting, we must reduce our scope.
+
+\begin{definition}[symmetric monoidal groupoid]
+A \emph{symmetric monoidal groupoid} is a symmetric monoidal category $(S,\square)$ in which all morphisms are isomorphisms.
+
+Further, we say $S$ is \emph{faithful} if all translations $s \square : \Aut(t) \to \Aut(s \square t)$ are injective. 
+\end{definition}
+
+\begin{definition}
+Given a symmetric monoidal category $S$, $\iso(S)$ is the symmetric monoidal groupoid which is a subcategory of $S$ consisting of the same objects but inheriting only isomorphisms.
+\end{definition}
+A variety of symmetric monoidal groupoids yield interesting geometric realizations.
+\begin{example}
+The category $\mathbf F(R)$ with $\square = \oplus$ is contractible since it has an initial object $0$. However $\iso(\mathbf F(R))$ 
+is more interesting and in fact equivalent to the disjoint union $\coprod_n GL_n(R)$ where $n$ runs through the integers.
+\end{example}
+\begin{example}
+Similarly, $0$ is also an initial object for the category $\mathbf P(R)$ with $\square = \oplus$.
+But $\iso(\mathbf P(R))$ is equivalent to $\coprod_P \Aut(P)$ where $P$ runs over representatives of isomorphism clases 
+of finitely generated projective modules.
+\end{example}
+
+Let $S$ be a faithful symmetric monoidal groupoid. 
+
+\begin{definition}[$S^{-1}S$]
+Define $S^{-1}S$ to be a category where the objects are pairs of objects $(m,n)$ for $m, n \in S$. 
+Morphisms in $S^{-1}S$ from $(m_1,m_2) \to (n_1,n_2)$ are equivalence classes of triples $(s,f_1,f_2)$ for some object $s \in S$ and 
+$(f_1,f_2) : (s \square m_1, s \square m_2) \to (n_1,n_2)$ being a morphism in $S \times S$.
+
+That is,
+\[
+\begin{tikzcd}
+(m_1,m_2) \arrow[r, "s\square"] & (s\square m_1, s \square m_2) \arrow[r, "(f_1{,}f_2)"] & (n_1, n_2)
+\end{tikzcd}
+\]
+which we consider equivalent to 
+\[
+\begin{tikzcd}
+(m_1,m_2) \arrow[r, "t\square"] & (t\square m_1, t \square m_2) \arrow[r, "(g_1{,}g_2)"] & (n_1, n_2)
+\end{tikzcd}
+\]
+if there is an isomorphism $\alpha : s \xlongrightarrow{\cong} t$ such that $\alpha \square g_1 = f_1$ and $\alpha \square g_2 = f_2$. 
+The composition $[(s,f_1,f_2)]\circ[(t,g_1,g_2)]$ is defined as $[(s \square t, f_1 \circ g_1, f_2 \circ g_2)]$.
+One may verify this is well-defined and indeed forms a category.
+\end{definition}
+
+\begin{remark}
+Consider two distinguished classes of morphisms in $S^{-1}S$.
+One is simultaneous translations, which we formally write $s \square : (m_1,m_2) \to (s\square m_1, s \square m_2)$, represented by $(s,\id,\id)$. 
+The other being pairs of maps $(f_1, f_2) : (m_1, m_2) \to (n_1, n_2)$ coming from morphisms in $S \times S$ where the translation composite is trivial.
+That is, the morphism is represented by $(e, f_1, f_2)$.
+\end{remark}
+
+\begin{proposition}
+Let $S$ be a faithful symmetric monoidal groupoid. Then any morphism $[(s,f_1,f_2)]$ in $S^{-1}S$ 
+determines $s, f_1, f_2$ uniquely up to unique isomorphisms.
+\end{proposition}
+\begin{proof}
+It is clear $s, f_1, f_2$ are determined uniquely up to isomorphism.
+Suppose $(s,f_1,f_2)$ is equivalent to $(t,g_1,g_2)$ via isomorphisms $\alpha, \beta : s \xlongrightarrow{\cong} t$ 
+Since $\alpha \square g_i = f_i = \beta \square g_i$, 
+we have $\alpha \square m_i = \beta \square m_i$ and since $S$ was faithful, we recover $\alpha = \beta$.
+\end{proof}
+
+Thus, we can think of morphisms $[(s,f_1,f_2)]$ in $S^{-1}S$ as comprising of a \emph{translation component} $[s \square]$ and
+\emph{mapping component} $[(f_1,f_2)]$.
+
+\begin{remark}
+$S^{-1}S$ is a symmetric monoidal category with the multiplication given by $(m_1,m_2) \square (n_1, n_2) := (m_1 \square n_1, m_2 \square n_2)$.
+It is clear that the functor $S \to S^{-1}S$, which sends $s \mapsto (s,e)$ is a monoidal functor.
+Further, a monoidal functor $S \to T$ describes a (monoidal) natural transformation
+\[
+\begin{tikzcd}
+S \arrow[r] \arrow[d] & T \arrow[d] \\
+S^{-1}S \arrow[r] & T^{-1}T
+\end{tikzcd}
+\]
+
+We also have an induced $H$-space map $BS \to B(S^{-1}S)$, and a map $\pi_0(S) \to \pi_0(S^{-1}S)$
+of abelian monoids. (The component of $s$ maps to the component of $(s,e)$) 
+
+Further, $\pi_0(S^{-1}S)$ is an abelian group since for the connected coponent of $(m,n)$ we have we have inverse $(n,m)$ 
+due to the isomorphism $(e,e) \xlongrightarrow{\cong} (m,n) \square (n,m)$
+given by the mapping component $[(c_{mn},c^{-1}_{mn})]$ where $c_{mn}$ is the symmetric braiding given by isomorphism $m \square n \to n \square m$ in $S$.
+It is abelian due to $S$ being symmetric. 
+
+%(Warning: these isomorphisms $(e,e) \to (m,n) \square (n,m)$ are not natural in $m, n$ due to both an isomorphism and its inverse being used in the definition.)
+\end{remark}
+
+\begin{definition}
+Let $S$ be a symmetric monoidal groupoid. We define 
+\[
+K^\square(S) := B(S^{-1}S)
+\]
+and consequently we can define 
+$K^\square_n(S) = \pi_n B(S^{-1}S)$.
+  
+\end{definition}
+Note that a (strict) monoidal functor $S \to T$ induces $S^{-1}S \to T^{-1}T$ which in turn induces $K^\square(S) \to K^\square(T)$, 
+Thus the $S^{-1}S$ construction is functorial!
+
+\begin{proposition}
+The group $K_0^\square(S) = \pi_0(S^{-1}S)$ is indeed the group completion of the monoid given by 
+isomorphism classes of $S$ via the inclusion $i_*: \pi_0(S) \to \pi_0(S^{-1}S)$.
+\end{proposition}
+\begin{proof}
+Let $\varphi : \pi_0(S) \to G$ be a group completion of $\pi_0(S)$.
+We will show that the universal homomorphism $\widetilde i_* : G \to \pi_0(S^{-1}S)$ is invertible.
+Let $j$ be the set map $S^{-1}S \to  G$ as $j(m,n) := \varphi(m) - \varphi(n)$.
+If we have $s \in S$ then 
+$j(m_1,m_2) = j(s\square m_1, s\square m_2)$ and if $f_i : m_i \to n_i$, then $j(m_1,m_2) = \varphi(m_1) - \varphi(m_2) = \varphi(n_1) - \varphi(n_2) = j(n_1,n_2)$.
+This shows $j$ induces a well-defined homomorphism $j_* : \pi_0(S^{-1}S) \to G$. 
+%We'll show $i_*$ satisfies the universal property. Let $G$ be a group and $\varphi : \pi_0(S) \to G$ be a monoid homomorphism.
+%Then define $\widetilde \varphi : \pi_0({S^{-1}S}) \to G$ by mapping the component of $(m,n)$ to $\varphi([m]) - \varphi([n])$.
+%Clearly, we have $\widetilde \varphi \circ i_* = \varphi$ since $i_*([m]) = [(m,e)]$.
+%Furthermore, this choice is fixed 
+\end{proof}
+This shows our definition matches the definition of $K_0(S)$ in Chapter 2.
+
+\subsection{Group Completions of $BS$}
+We turn our attention to 
+
+\begin{theorem}
+If $S$
+\end{theorem}
+
+\begin{theorem}[Quillen]
+Let $S = \coprod GL_n(R)$ which is equivalent to $\mathbf F(R)$.
+Then $B(S^{-1}S)$ is the group-completion of $BS$ and 
+\[
+B(S^{-1}S) \eqv \Z \times BGL(R)^+
+\]
+\end{theorem}
+\begin{proof}
+\end{proof}
+
+\begin{theorem}
+Let $S$ be a symmetric monoidal groupoid with faithful transitions satisfying cofinality.
+
+We have then 
+\[
+K^\square(S) \eqv K^\square_0 (S) \times B \Aut(S)^+A 
+\]
+\end{theorem}
+
+\section{Quillen's $Q$-construction}
+In [Quillen, 19XX], Quillen proposed another construction for the $K$-theory space.
+Given an exact category $\A$, []
+we will define the category $Q \A$, and then define $K_n(\A) = \pi_{n+1}(BQ\A)$ for all $n \geq 0$.
+
+\begin{definition}[$Q$-construction]
+Let $\A$ be an exact category. We define $Q\A$ as the category with the same objects as $\A$, and the morphisms between $C \to C'$ are 
+equivalence classes of diagrams
+\[
+\begin{tikzcd}
+C & D \arrow[l,two heads, "j"] \arrow[r,tail, "i"] & C' 
+\end{tikzcd}
+\]
+where two such diagrams are considered isomorphic when there is an isomorphism of these diagrams which is identity on $C$ and $C'$.
+
+The composition of the above arrow with $\Qmor{C'}{D'}{C''}$ is given by $\Qmor{C}{D \times_{C'} D'}{C''}$
+\[
+\begin{tikzcd}%[column sep=large]
+D \times_{C'} D' \arrow[r, tail, "\pi_2"] \arrow[d, two heads, "\pi_1"'] & D' \arrow[r, tail, "i'"] \arrow[d, two heads, "j'"]& C''\\
+D \arrow[r, tail, "i"'] \arrow[d, two heads, "j"'] & C'\\
+C
+\end{tikzcd}
+\]
+It is clear that composition is well-defined and associative and so $Q\A$ forms a well-defined category.
+\end{definition}
+
+[Set theoretic remark]
+
+\begin{remark}
+Admissible monomorphisms $C \admono C'$ determine a morphism $C \to C'$ by taking $D = C'$ and $D \adepi C'$ as identity.
+We will call these morphisms \emph{injective}.
+
+Similarly, admissible epimorphisms $C \adepi C'$ determine a morphism $C \to C'$ by taking $D = C$ and $C \admono D$ as identity.
+We will call these morphisms \emph{surjective}.
+
+Note that these distinguished families of morphisms are closed under composition, and generate all morphisms.
+Furthermore, any morphism $\Qmor{C}{D}{C'}$ factors as $i_*j^*$ where 
+$i_*$ is the injective morphism determined by $D \admono C'$ and $j^*$ is the surjective morphism determined by $C \adepi D$.
+This factorization is unique up to unique isomorphism.
+\end{remark}
+
+\subsubsection*{Alternative Description of Morphisms in $Q\A$}
+There is an alternative way to describe the morphisms $C \to D$ in $Q\A$
+in terms of \emph{subobjects} and \emph{subquotients}. Fix some object $C$ in $\A$.
+
+\begin{definition}
+An \emph{admissible subobject} of $C$ is an equivalence class of admissible monomorphisms
+$C' \admono C$ with equivalence given by whether they factor through each other, 
+or in other words as isomorphism in $\A \downarrow C$. 
+
+An \emph{admissible subquotient} is defined in the opposite manner, with admissible epimorphisms.
+\end{definition}
+
+One can define a partial order on the set of admissible monomorphisms into $C$.
+We declare $C_1 \leq C_2$ if there is an admissible monomorphism $C_1 \admono C_2$, which if it exists
+has to be unique.
+We then say $(C_1, C_2)$ is an \emph{admissible layer} in $C$ and the cokernel $C_2/C_1$ is an \emph{admissible subquotient} of $C$.
+
+\begin{proposition}
+The morphisms from $C \to C'$ may be identified with pairs $((C_1,C_2),\varphi)$,
+where $(C_1,C_2)$ is an admissible layer in $C'$ and $\varphi : C' \xlongrightarrow{\cong} C_2/C_1$ is an isomorphism.
+
+Furthermore, composition of morphisms $C \to C'$ and $C' \to C''$ arises from the fact that
+subquotient of a subquotient is a subquotient.
+\end{proposition}
 
 
-\section{$S^{-1}S$ construction on a Symmetric Monoidal Category}
+\begin{theorem}[Quillen]
 
-\section{$Q$-construction on an Exact Category}
+\end{theorem}
+
+[Functoriality]
 
 \section{Quillen's $+=Q$ Theorem}
 
+\begin{theorem}[Quillen]
+Let $\mathcal A$ be a split-exact category 
+and $S = \iso \mathcal A$, then \[\Omega BQ \mathcal A \eqv B(S^{-1}S) \]
+\end{theorem}
+
+\begin{corollary}[+=Q]
+For any unital ring $R$,
+\[\Omega B Q \mathbf P (R) \eqv K_0(R) \times BGL(R)^+\]
+\end{corollary}
