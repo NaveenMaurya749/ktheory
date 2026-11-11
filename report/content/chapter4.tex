@@ -326,7 +326,7 @@ and forms a model for $X^+$. We do not pursue the full proof here and instead re
 Indeed, there is an alternate result in Proposition \ref{prop:acyclic_H_space} which shows that what we have proven suffices
 for the case we are interested in, $BGL(R)^+$, which is what we shall discuss now.
 
-\section{The $BGL(R)^+$ construction for a ring $R$}
+\section{The $BGL(R)^+$ construction for a ring $R$} \ref{sec:BGL(R)^+}
 We apply the $+$-construction on the classifying space $BGL(R)$ of the stable general linear group over $R$.
 The maximal perfect subgroup of $GL(R) = \pi_1BGL(R)$ is the stable group of elementary matrices, $E(R)$.
 
@@ -539,6 +539,7 @@ Let $j$ be the set map $S^{-1}S \to  G$ as $j(m,n) := \varphi(m) - \varphi(n)$.
 If we have $s \in S$ then 
 $j(m_1,m_2) = j(s\square m_1, s\square m_2)$ and if $f_i : m_i \to n_i$, then $j(m_1,m_2) = \varphi(m_1) - \varphi(m_2) = \varphi(n_1) - \varphi(n_2) = j(n_1,n_2)$.
 This shows $j$ induces a well-defined homomorphism $j_* : \pi_0(S^{-1}S) \to G$. 
+By construction, it is the inverse to $G \to \pi_0(S^{-1}S)$.
 %We'll show $i_*$ satisfies the universal property. Let $G$ be a group and $\varphi : \pi_0(S) \to G$ be a monoid homomorphism.
 %Then define $\widetilde \varphi : \pi_0({S^{-1}S}) \to G$ by mapping the component of $(m,n)$ to $\varphi([m]) - \varphi([n])$.
 %Clearly, we have $\widetilde \varphi \circ i_* = \varphi$ since $i_*([m]) = [(m,e)]$.
@@ -622,7 +623,7 @@ An \emph{admissible subobject} of $C$ is an equivalence class of admissible mono
 $C' \admono C$ with equivalence given by whether they factor through each other, 
 or in other words as isomorphism in $\A \downarrow C$. 
 
-An \emph{admissible subquotient} is defined in the opposite manner, with admissible epimorphisms.
+An \emph{admissible subquotient} is defined in the dual manner, using admissible epimorphisms.
 \end{definition}
 
 One can define a partial order on the set of admissible monomorphisms into $C$.
@@ -632,20 +633,64 @@ We then say $(C_1, C_2)$ is an \emph{admissible layer} in $C$ and the cokernel $
 
 \begin{proposition}
 The morphisms from $C \to C'$ may be identified with pairs $((C_1,C_2),\varphi)$,
-where $(C_1,C_2)$ is an admissible layer in $C'$ and $\varphi : C' \xlongrightarrow{\cong} C_2/C_1$ is an isomorphism.
+where $(C_1,C_2)$ is an admissible layer in $C'$ and $\varphi : C \xlongrightarrow{\cong} C_2/C_1$ is an isomorphism.
 
-Furthermore, composition of morphisms $C \to C'$ and $C' \to C''$ arises from the fact that
-subquotient of a subquotient is a subquotient.
+Furthermore, composition of morphisms $C \to C'$ and $C' \to C''$ is associative and arises from the fact that
+subquotient of a subquotient is a subquotient. 
+\end{proposition}
+\begin{proof}
+For $\Qmor{C}{D}{C'}$, take the admissible layer $(C_1, C_2)$ where $C_1 = D$ and $C_2$ is the kernel of $C \adepi D$.
+Clearly, since $C_2$ gives a subobject of $D = C_1$ which gives a subobject of $C'$, the given pair is indeed 
+an admissible layer. The isomorphism follows since both $C$ and the $C_2/C_1$ are cokernels of the kernel of an admissible epimorphism.
+
+\[
+\begin{tikzcd}
+  & \ker(j) \arrow[d, tail] \arrow[dl, "0"'] \arrow[dr, tail] & \\
+C\arrow[dr, "\cong"'] & D \arrow[l, two heads, "j"] \arrow[r, tail, "i"'] \arrow[d, two heads] & C' \\
+  & D/\ker(j)&
+\end{tikzcd}
+\]
+Conversely, an admissible layer $(C_1,C_2)$ in $C$ evidently determines a morphism 
+$\Qmor{C_2/C_1}{C_2}{C}$ in $Q\A$.
+\end{proof}
+
+\begin{proposition}
+An exact functor $F : \A \to \B$ induces a functor $QF : Q\A \to Q\B$.
 \end{proposition}
 
-
 \begin{theorem}[Quillen]
-
+The fundmental group of $BQ\A$ at the basepoint $0$ is canonically isomorphic to 
+the $K_0(\A)$ group defined in Chapter 2.
 \end{theorem}
+\begin{proof}
+\end{proof}
+
+[Set Theory remark]
+
+\begin{definition}
+Let $\A$ be a small exact category. Then $K\A$ is defined to be the space $\Omega BQ\A$
+and consequently, we define
+\[
+K_n(\A) := \pi_n(K\A) = \pi_{n+1}(BQ\A)
+\]
+\end{definition}
 
 [Functoriality]
 
-\section{Quillen's $+=Q$ Theorem}
+\begin{example}
+If $\A$ is a small category equivalent to the category $\mathbf P(R)$ of finitely generated projective modules over $R$,
+then we define $K_n(R) := K_n(\A)$. It is clear this matches our original definition for $n = 0$.
+We prove in \S\ref{sec:+=Q} the $+=Q$ Theorem, which implies that this matches with the description of the 
+$K_n$ groups defined using the $+$-construction in \S\ref{sec:BGL(R)^+}.
+\end{example}
+
+%\subsection{Functoriality of the $Q$-construction}
+
+\subsection{Key Properties of the $Q$-construction}
+
+\section{Quillen's $+=Q$ Theorem} \label{sec:+=Q}
+
+Given an additive category $\A$, there are two approaches to defining $K$-theory over $\A$.
 
 \begin{theorem}[Quillen]
 Let $\mathcal A$ be a split-exact category 
