@@ -1,10 +1,14 @@
-In this chapter, we will develop the notion of the Grothendieck Group $K_0$ accross a variety of contexts. 
-First, we discuss the grothendieck group of a ring, then symmetric monoidal categories. 
+In this chapter, we will develop the notion of the an abelian group $K_0$ called the Grothendieck Group 
+accross a variety of contexts, which describes the additive properties of (right) projective modules over $R$. 
+First, we discuss the grothendieck group of a ring, then symmetric monoidal categories, and finally exact cateogries.
+$K_0(R)$ corresponding to any unital ring $R$ can be defined using all of these settings,
+and we shall show they are equivalent.
+We will also show the defined $K_0(R)$ group is functorial.
 
 \section{$K_0$ of a ring}
 Let $R$ be a (unital) ring. The interesting objects of study will be finitely generated projective modules over $R$.
-We denote by $\mathbf{P}(R)$ the set of isomorphism classes of fintely generated projective modules over $R$.
-Note the $\mathbf{P}(R)$ derives a monoid structure through $\oplus$ because direct sums yield an associative operation that preserves isomorphisms.
+We denote by $\mathbf{P}(R)$ the category of fintely generated projective modules over $R$.
+Note that the isomorphism classes of $\mathbf{P}(R)$ (if they form a set) derive a monoid structure through $\oplus$.
 This monoid is also abelian due to the isomorphisms $M \oplus N \cong N \oplus M$ for any $R$-modules.
 
 The idea is to consider the group naturally derived by implementing inverses for all elements in this monoid.
@@ -48,10 +52,14 @@ Furthermore, any abelain group satisfying the given universal property is isomor
 There is an alternative (but equivalent) characterization of $\tilde{M}$ via the quotienting the free group on $M$ by the monoidal relations.
 \begin{proposition}
   Let $K(M)$ be the abelian group given by taking the free abelian group $F(M)$ on the set $M$ and quotienting
-  by all relations of the form $[a] + [b] - [a+b]$ where $a, b \in M$ and $[x]$ represents the element in $F(M)$ corresponding to the element $x \in M$.
-  Then $K(M) \cong \tilde{M}$.
+  by all relations of the form $[a] + [b] - [a+b]$ where $a, b \in M$ and $[x]$ is the symbol in $F(M)$ corresponding to the element $x \in M$.
+  Then $K(M) \cong \tilde{M}$ naturally.
 \end{proposition}
 \begin{proof}
+  %We show that there is an isomorphism $K(M) \to \widetilde{M}$ which we describe by 
+  %mapping the generators $[a]$ to $[(a,0)]$. By the universal property,
+  %this has to be canonical. 
+
   We will show that $K(M)$ satisfies the universal property of $\tilde{M}$. 
   Let $F(M)$ represent the free abelian group on the set $M$.
   The map $i : M \to K(M)$ on $x$ is given by taking the equivalence class of the element $x$.
@@ -159,7 +167,10 @@ a \square (e \square c) & & (a \square e) \square c \\
 \]
 and the commutativity hexagon
 \[
-a \square b \cong
+\begin{tikzcd}
+a \square (b \square c) & (a \square b) \square c & c \square (a \square b) \\
+(a \square c) \square b & (a \square c) \square b & (c \square a) \square b
+\end{tikzcd}
 \]
 for objects $a,b,c,d$ in $S$.
 \end{definition}
