@@ -8,7 +8,7 @@
 \usepackage{titlesec}
 \usepackage{tikz-cd}
 \usetikzlibrary{calc}
-\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\usepackage[colorlinks=true,linkcolor=violet,citecolor=violet,urlcolor=violet]{hyperref}
 %\usepackage[backend=biber,style=alphabetic]{biblatex}
 \setlist{nosep}
 \linespread{1.0}  
@@ -25,9 +25,8 @@
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{corollary}[theorem]{Corollary}
-\theoremstyle{remark}
-\newtheorem{remark}{Remark}[section]
 \newtheorem{example}{Example}[section]
+\newtheorem{remark}{Remark}[section]
 
 % ---------- Macros ------------
 \newcommand{\Cat}{\mathbf{Cat}}
@@ -38,6 +37,8 @@
 \DeclareMathOperator*{\id}{id}
 \DeclareMathOperator*{\iso}{iso}
 \DeclareMathOperator*{\Aut}{Aut}
+\DeclareMathOperator*{\Spec}{Spec}
+\DeclareMathOperator*{\St}{St}
 \newcommand{\0}{\mathbf{0}}
 \newcommand{\1}{\mathbf{1}}
 \newcommand{\2}{\mathbf{2}}
@@ -47,9 +48,12 @@
 \newcommand{\m}{\mathfrak{m}}
 \newcommand{\A}{\mathcal{A}}
 \newcommand{\B}{\mathcal{B}}
+\newcommand{\C}{\mathcal{C}}
 \newcommand{\E}{\mathcal{E}}
 \newcommand{\refl}{\mathsf{refl}}
 \newcommand{\back}{\leftarrow}
+\newcommand{\exact}[3]{0 \to #1 \to #2 \to #3 \to 0}
+\newcommand{\grpexact}[3]{1 \to #1 \to #2 \to #3 \to 1}
 \newcommand{\admono}{\rightarrowtail}
 \newcommand{\admonoback}{\leftarrowtail}
 \newcommand{\adepi}{\twoheadleftarrow}
@@ -62,6 +66,8 @@
 \newcommand{\fillup}{\mathord{\uparrow}}
 \newcommand{\filldown}{\mathord{\downarrow}}
 \newcommand{\Hom}{\text{Hom}}
+\newcommand{\pmat}[4]{\begin{pmatrix} #1 & #2 \\ #3 & #4 \end{pmatrix}}
+\newcommand{\psmat}[4]{\begin{psmallmatrix} #1 & #2 \\ #3 & #4 \end{psmallmatrix}}
 \makeatletter
 \DeclareRobustCommand{\sqcdot}{\mathbin{\mathpalette\morphic@sqcdot\relax}}
 \newcommand{\morphic@sqcdot}[2]{%
@@ -81,15 +87,16 @@
 
 \tableofcontents
 
-\chapter{Projective Modules}
+\chapter{Preliminaries}
 \input{content/chapter1.tex}
 
 \chapter{The Grothendieck Group $K_0$}
 \input{content/chapter2.tex}
 
 \chapter{Groups $K_1$ and $K_2$ of a ring}
+\input{content/chapter3.tex}
 
-\chapter{Constructions of Higher K-Theory} 
+\chapter{Higher $K$-Theory and the $K_n$ Groups} 
 \input{content/chapter4.tex}
 
 % ---------- References ----------

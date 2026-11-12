@@ -1,14 +1,123 @@
-The subject of K-Theory concerns with studying vector bundles on spaces.
-Algebraic K-Theory studies the algebraic analogue of the same, projective modules over associative rings.
+The subject of K-Theory was historically concerned with studying vector bundles on spaces.
+In Algbraic $K$-Theory, the objects of interest are projective modules over a ring, and vector bundles over
+schemes.
 
 \section{Projective Modules}
 
-\subsection{Idempotence Criteria for Projective Modules}
+  Let $R$ be a (unital) associative ring. We mention the standard notion of projective modules  
+  and illustrate its relevance to the subject of $K$-theory.
 
-\subsection{Constructing Projective Modules}
+  Projective modules are closely related to free modules, and in fact.
+
+\begin{definition}[Projective Module]
+  We say $P$ is a projective (right\footnote{we fix a convention, either right or left}) $R$-module if it satisfies the following property:
+    Let $M \to N$ be a surjection of (right) $R$-modules, then any map $\varphi : P \to N$ lifts to
+  a map $\widetilde{\varphi} : P \to M$ such that the following diagram commutes:
+  \[ 
+   \begin{tikzcd}[row sep=large, column sep=large]
+                     & P \arrow[dl, dashed, "\exists\widetilde\varphi"'] \arrow[d, "\varphi"] & \\
+    M \arrow[r, two heads, "f"'] & N
+    \end{tikzcd}
+  \]
+\end{definition}
+
+It is a standard result that this definition is equivalent to the various following criteria:
+\begin{proposition}
+Let $R$ be as before and $P$ be an (right) $R$-module. Then the following are equivalent: 
+\begin{itemize}
+  \item [(i)] $P$ is projective. 
+  \item [(ii)] For any surjection $M \adepiback N$ of (right) $R$-modules, the induced map $\Hom(P,M) \to \Hom(P,N)$
+  is a surjection.
+  \item [(iii)] Any surjection $\pi : M \adepiback P$ of (right) $R$-modules splits, i.e., there is $s : P \to M$ such that $\pi \circ s = 1_P$.
+  \item [(iv)] There exists an $R$-module $Q$ such that $P \oplus Q$ is a free $R$-module.
+\end{itemize}
+\end{proposition}
+
+\begin{proof}
+  
+\end{proof}
+
+\subsection{Basic Properties of Projective Modules}
+
+When the ring $R$ is commutative, right $R$-modules can simply be called $R$-modules.
+
+\begin{example}
+All free modules are obviously projective. 
+\end{example}
+
+We claim that there exist non-free projective modules, and the failure of all projective modules
+to be free shall be a major core of the theory henceforth.
+
+\begin{example}\label{ch1:component_free}
+Let $R$ and $S$ be non-trivial commutative rings. Then $R \oplus 0$ and $0 \oplus S$ are unsurprisingly projective $R \oplus S$-modules since $R \oplus S$ is a free
+$R \oplus S$ module.
+Yet, neither is free.
+\end{example}
+
+It is a question of interest to characterize when are projectives are free. 
+\begin{proposition}
+If $R$ is a field or a division ring, then all (right) projective modules over $R$ are free. 
+\end{proposition}
+\begin{proof}
+
+\end{proof}
+
+We also have the following result for commutative rings $R$: 
+
+\begin{proposition}
+All projective modules over a (commutative) local ring $R$ are free.
+\end{proposition}
+It is a standard exercise in algebra to show this is true for finitely generated projective modules.
+However, the result holds more generally for any projective module over $R$ which we refer the reader to [Kaplansky].
+
+\begin{proposition}\label{prop:projlocal}
+If $\p$ is a prime ideal of a commutative ring $R$ and $P$ is a finitely generated projective $R$-module,
+then the localization $P_p$ is free, that is, $P_p \cong (R_p)^n$ for some $n$.
+
+Furthermore, a (finite) subcollection of the open sets $D(s)$ of $\Spec(R)$ may be chosen, say $\{D(s_i)\}$, to cover $R$
+such that $P_{s_i} \cong (R[\frac{1}{s_i}])^{n_i}$ for each $i$.
+\end{proposition}
+
+\begin{proposition}
+All projective modules over an Euclidean domain are free.
+\end{proposition}
+
+
+\section{Constructing Projective Modules}
+To construct more interesting examples of projective modules, we have the following 
+``recipes" inspired from the contruction of a vector bundle in the topological case.
+[See [] for a treatment on patching vector bundles.]
+
+\subsection{Open Patching}
+Let $R$ be a 
+
 - Patching along localizations \\
 - Milnor Patching
 
-\subsection{Classification of Projective Modules}
-- Projective modules <-> vector bundles
-- 
+\section{Idempotence Criteria for Projective Modules}
+Observe that for a ring $R$ and a projective (right) $R$-module $P$,
+we have 
+
+\section{Swan's Theorem}
+
+The following result due to Swan [] shows why projective modules are the correct 
+algebraic analogue to vector bundles in the topological setting. 
+
+\begin{theorem}
+Let $X$ be a compact Hausorff space. Then the functor $C^\infty(X)$ taking $X$ 
+\end{theorem}
+
+This does not illustrate why we study projective modules over non-commutative rings though.
+
+- Projective modules <-> vector bundles \\
+- Swan's Theorem
+
+
+Here is a result which shall show why we restrict our attention to finitely generated projective modules.
+
+\begin{example}[Eilenberg Swindle]
+Suppose $P$ be a projective module over commutative ring $R$, then 
+Let $V = R \oplus R \oplus R \cdots$ be a countable direct sum of a commutative ring $R$.
+Then note that $W = V \oplus V$ can be put into a bijection with $V$ (due to the bijection $2 \times \N \cong \N$).
+\end{example}
+

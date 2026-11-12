@@ -64,7 +64,7 @@ There is an alternative (but equivalent) characterization of $\tilde{M}$ via the
 \begin{example}[]
   Let $R$ be a (unital) ring satisfying the \textit{Invariant Basis Property (IBP)}. That is, $R^m \cong R^n$ implies $m = n$.
   Then the monoid of isomorphism classes of free $R$-modules with the operation $\oplus$ is isomorphic to $\N$, the isomorphism given by the map $R^n \mapsto n$. Consequently, its group completion
-  is isomorphic to the abelian group $\Z$. \\
+  is isomorphic to the abelian group $\Z$. 
 \end{example}
 Note that all fields (and division rings) $F$ satisfy IBP since dimension of an $F$-module is independent of the choice of basis.
 Further, any ring $R$ with a map $R \to F$, a field or a division ring $F$ satisfies IBP. In particular, commutative rings all satisfy IBP.
@@ -74,12 +74,13 @@ Further, any ring $R$ with a map $R \to F$, a field or a division ring $F$ satis
   under pointwise addition of maps. Then the group completion of this monoid is isomorphic to the abelian group of continuous maps 
   $X \to \Z$ denoted $[X,\Z]$.
   If $X$ is quasicompact, this is in fact a free abelian group.
-  Notably, $[X, \N]$ also admits a commutative semiring structure via pointwise multiplication in addtion to the monoid operation.
-  This makes $[X, \Z]$ into a commutative ring. 
+ % Notably, $[X, \N]$ also admits a commutative semiring structure via pointwise multiplication in addtion to the monoid operation.
+ % This makes $[X, \Z]$ into a commutative ring. 
 \end{example}
 
-\subsection{Defining $K_0(R)$}
-Now we can define the group $K_0(R)$ as the group completion of the monoid $\mathbf{P}(R)$ consisting of finitely generated
+\subsection{$K_0(R)$ of a ring $R$}
+Now we can define the group $K_0(R)$ as the group completion of the monoid $P(R)$ consisting of 
+isomorphism classes of finitely generated
 projective $R$-modules with the monoid operation given by $\oplus$.
 
 \begin{example}
@@ -89,7 +90,9 @@ projective $R$-modules with the monoid operation given by $\oplus$.
 \end{example}
 
 \begin{example}
-  Note that finitely generated projectives over $\Z$ are free. Thus $K_0(\Z) \cong \Z$. More generally, for any ring $R$ with the IBP 
+  Note that finitely generated projectives over Euclidean Domains, in particular over $\Z$ are free.
+  Thus $K_0(\Z) \cong \Z$. More generally, for any ring $R$ with the IBP, we have an 
+  injective group homomorphism $\Z \to K_0(R)$ given by $n \mapsto R^n$.
 \end{example}
 
 %\subsection{Rank and $H_0$} 
@@ -113,7 +116,7 @@ projective $R$-modules with the monoid operation given by $\oplus$.
 %\begin{example}
 %
 %\end{example}
-%
+
 \subsection{Morita Equivalence and Invariance}
 
 Suppose we have (unital) rings $R$ and $S$ such that we have an equivalence of the respective categories of right modules:
@@ -124,8 +127,194 @@ Then we say that $R$ and $S$ are \textbf{Morita equivalent}.
 
 A consequence of Morita Equivalence is that $R$ and $S$ yield isomorphic $K_0$ groups.
 
+\subsection{Base Change and Transfer}
+
 \section{$K_0$ of a Symmetric Monoidal Category}
 
-%A symmetric monoidal category is, vaguely speaking, a category $\C$ with a bifunctor $\box : \C \times \C \to \C$ satisfying
+We will now introduce the $K_0$ group in a different setting, called
+\emph{symmetric monoidal categories}, which is an abstraction of some of the common
+properties that $\oplus, \otimes, \sqcup, \times$ share.
+
+\begin{definition}
+A \emph{symmetric monoidal category} is a category $S$ with a distinguished object $e$
+and a functor $\square : S \times S \to S$ satisfying natural isomorphisms
+\[
+  e \square s \cong s, \qquad s \square e \cong s \qquad 
+  s \square (t \square u) \cong (s \square t) \square u,\quad  \text{ and } \quad 
+  s \square t \cong t \square s
+\]
+Furthermore, these natural isomorphisms must obey coherence laws given by the MacLane pentagon for associativity: 
+\[
+\begin{tikzcd}
+a \square (b \square (c \square d))  & (a \square b) \square (c \square d) & ((a \square b) \square c) \square d \\
+a \square ((b \square c) \square d) & & (a \square (b \square c) \square d), \\
+\end{tikzcd}
+\]
+as well as the unit coherence laws,
+\[
+\begin{tikzcd}
+a \square (e \square c) & & (a \square e) \square c \\
+& a \square c &
+\end{tikzcd}
+\]
+and the commutativity hexagon
+\[
+a \square b \cong
+\]
+for objects $a,b,c,d$ in $S$.
+\end{definition}
+
+The role of coherence is so that we can write products $s_1 \square s_2 \square s_3 \square \cdots \square s_n$ 
+unambiguously and consistently. More precisely, there is a consistent and natural way to transform a given 
+association and permuation of the product into any other.
+
+Through the rest of this text, we will mostly gloss over concerns about coherence when dealing with symmetric
+monoidal categories.
+The reader is suggested to refer to [MacLane] for the precise description of symmetric monoidal categories
+and why the pentagonal and hexagonal diagrams suffice for coherence.
+\begin{example}
+Any category with either a direct sum $\oplus$ is symmetric monoidal with $\square = \oplus$,
+which includes all abelian categories. In particular, $\mathbf F(R), \mathbf P(R), \mathbf M(R)$
+are all symmetric monoidal with $\square = \oplus$.
+the category of all finitely generated modules over $R$ are all examples of symmetric monoidal categories.
+
+
+Categories with finite coproducts $\sqcup$ as well as categories with finite products similarly 
+are symmetric monoidal with $\square = \sqcup$ and $\square = \times$ respectively.
+\end{example}
+
+\begin{definition}[$K_0$ of a symmetric monoidal category]
+Suppose that isomorphism classes of a symmetric monoidal category $S$ form a set.
+Then we can define the \emph{Grothendieck group} $K_0^{\square}(S)$ to be the abelian group
+generated by isomorphism classes of $S$, quotiented by relations given by
+$[s \square t] = [s] + [t]$ for every object $s, t$ in $S$.
+\end{definition}
+
+When it is understood, we may drop $\square$ and write $K_0(S)$.
+
+\begin{proposition}
+$K_0(S)$ is the group completion of the (abelian) monoid of isomorphism classes of $S$.
+\end{proposition}
+
+\begin{example}
+Finite sets
+\end{example}
+
+\begin{example}
+Burnside Ring, Representaion ring
+\end{example}
 
 \section{$K_0$ of an Exact Category}
+We now describe $K_0$ in yet another context.
+The notion of an exact category was introduced by Quillen in [], where the notion 
+is helpful for building higher $K$-Theory which we shall see in Chapter 4.
+
+\begin{definition}[Exact category]
+An exact category is a pair $(\C,\E)$ where $\C$ is an additive category fully embedded in some ambient abelian category $\A$,
+and $\E$ is the class of all sequences
+\begin{align} \label{eq:exactM}
+0 \to M' \to M \to M'' \to 0
+\end{align}
+in $\C$ which are exact in $\A$, such that $\C$ is closed under extensions, i.e.,
+for every exact sequence \eqref{eq:exactM} in $\A$, we have that
+$M$ is in $\C$ if and only if $M'$ and $M''$ are both in $\C$.
+\end{definition}
+
+From here on, we will simply write $\C$ for an exact category where $\E$ and $\A$ are implicit. 
+\begin{definition}[Admissible mono and epimorphisms]
+If a morphism $C' \to C$ appears in $\E$, we say it is an \emph{admissible monomorphism}.
+Dually, if $C \to C''$ appears in $\E$, we say it is an \emph{admissible epimorphism}.
+
+Admissible monomorphisms and epimorphisms will be denoted
+$ C' \admono C$ and $C \adepiback C''$ respectively.
+\end{definition}
+
+\begin{proposition}
+We note the following properties about the class $\E$ of exact sequences.
+\begin{enumerate}
+  \item Any sequence isomorphic to a sequence in $\E$ is in $\E$. An isomorphism of exact sequences is a commutative diagram
+%  \[
+%  \begin{tikzcd}
+%  0 \arrow[r] &   C' \arrow[r] \arrow[d, "\cong"] &   C \arrow[r] \arrow[d, "\cong"] &   C'' \arrow[r] \arrow[d, "\cong"] &   0  \\
+%  0 \arrow[r] &   D' \arrow[r]                &   D \arrow[r]                &   D'' \arrow[r]                &   0 
+%  \end{tikzcd}
+%  \] 
+  \item For any $C$ and $D$, the sequence
+  \[
+  0 \to {C} \xrightarrow{(\id,0)} {C\oplus D} \xrightarrow{\mathord{pr}_2} {D} \to 0
+  \]
+  is in $\E$.
+  \item The class of admissible epimorphisms (resp. monomorphisms) is closed under composition.
+  \item Let $C \to C''$ be a map possessing a kernel in $\C$. If there exists a map $C'' \to C$
+  such that $C'' \to C \to C$ is an admissible epimorphism, then $C \to C''$ is an admissible epimorphism.
+  Dually, for monomorphisms.
+  \item Suppose we have a sequence $0 \to C' \to C \to C''$ in $\E$ and a map $f : D \to C''$ in $\C$.
+  The pullback $E = C \times_{C''} D$ leads to the diagram 
+  \[
+  \begin{tikzcd}
+  0 \arrow[r] &   C' \arrow[r] \arrow[d, equal] &   E \arrow[r,  "\mathord{pr_2}"] \arrow[d, "\mathord{pr_1}"] &   D \arrow[r] \arrow[d, "f"] &   0  \\
+  0 \arrow[r] &   C' \arrow[r]                &   C \arrow[r]                &   C'' \arrow[r]                &   0 
+  \end{tikzcd}
+  \] 
+  and $E \to C$ is admissible. 
+\end{enumerate}
+\end{proposition}
+
+All these properties are immediate from the fact that $\E$ is closed under extensions.
+
+\begin{definition}[Exact functors]
+Let $\C$ and $\B$ be exact categories.
+A functor $F : \B \to \C$ is called \emph{exact} if it takes
+exact sequences in $\B$ to exact sequences in $\C$.
+\end{definition}
+
+\begin{example}
+An abelian category is exact in the evident way.
+\end{example}
+
+We may now define the Grothendieck Group on an exact category $\C$ by requiring
+additivity relations on exact sequences.
+
+%\subsection{Definition of $K_0(\C)$}
+
+\begin{definition}[$K_0$ of an exact category]
+Let $\C$ be a small exact category. Then we define $K_0(\C)$
+as the abelian group generated by symbols $[C]$, one for each object $C$ in $\C$,
+and relations $[C] = [C'] + [C'']$ for every exact sequence
+\[
+0 \to C' \to C \to C'' \to 0
+\]
+\end{definition}
+
+It follows that $[0] = 0$, $[C \oplus D] = [C] + [D]$
+and for any $C \cong D$, we have $[C] = [D]$.
+
+\begin{example}
+The category $\mathbf P(R)$ is an exact category via its embedding in $R$-$\mathbf{mod}$.
+Since every exact sequence of projective modules splits, we have
+$K_0(\mathbf P(R)) = K_0(R)$.
+\end{example}
+
+\begin{definition}[Split-exact categories]
+An exact category $\C$ is said to be \emph{split-exact} if every short exact sequence 
+in $\E$ is split, i.e., isomorphic to a sequence $0 \to C \to C \oplus D \to D \to 0$. 
+In this case, this $K_0(\C) \cong K_0^\oplus(\C)$ naturally if $\C$ is viewed as symmetric monoidal with respect to $\oplus$. 
+\end{definition}
+
+$\mathbf P(R)$ is an example of a split-exact category. It will turn out in Chapter 4
+that for such categories, the higher $K_n$-groups defined are also isomorphic. 
+
+\begin{example}
+$K_0$ of a scheme
+\end{example}
+
+\begin{example}
+$G_0$
+\end{example}
+
+%\begin{proposition}[Fundamental Theorem for $K_0$ of regular rings]
+%\end{proposition}
+
+%\begin{proposition}
+%The base change $K_0(R[t]) \to K_0(R[t,t^{-1}])$ is injective.
+%\end{proposition}
