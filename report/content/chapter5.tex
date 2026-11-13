@@ -16,7 +16,7 @@ and show its equivalence with the $+$-construction for $(\mathbf{P}(R), \oplus)$
 In Section \S3, we describe Quillen's $Q$-construction for exact categories.
 Section \S4 is devoted to the $+=Q$ theorem, which implies equivalence of the $+$ and $Q$-construction for $\mathbf{P}(R)$.
 
-\section{The $BGL(R)^+$ construction for a ring $R$} \ref{sec:BGL(R)^+}
+\section{The $BGL(R)^+$ construction for a ring $R$}\label{sec:BGL(R)plus}
 We apply the $+$-construction on the classifying space $BGL(R)$ of the stable general linear group over $R$.
 The maximal perfect subgroup of $GL(R) = \pi_1BGL(R)$ is the stable group of elementary matrices, $E(R)$.
 
@@ -50,7 +50,7 @@ So $\pi_2(BG^+)$ injects into $\pi_1F(f)$, which in turns surjects onto the kern
 Since $\pi_2(BG^+)$ is abelian, it must inject into the center of $\pi_1 F(f)$.
 This tells us that $\pi_1F(f) \to P$ is a central extension.
 Since $f$ is acylic, we have $\pi_1 F(f)$ is perfect and so $H_2(\pi_1 F(f), \Z) = 0$.
-By the Recognition Theorem [Chapter 3], we have that $\pi_1F(f)$ is the universal central extension of $P$.
+By the Recognition Theorem of \label{thm:recog_universalcentral}, we have that $\pi_1F(f)$ is the universal central extension of $P$.
 Consequently, the kernel $\pi_2(BG^+)$ is given by $H_2(P;\Z)$.
 
 \end{proof}
@@ -83,16 +83,16 @@ It's not hard to see that we can put a $H$-space structure on $BGL(R)^+$.
 \begin{proposition}
 $BGL(R)^+$ is a homotopy-associative $H$-space.
 \end{proposition}
-\begin{proof}
-We have the group map $\oplus : GL_m(R) \times GL_n(R) \to GL_{m+n}(R) \subset GL(R)$
-which induces $BGL_m(R) \times BGL_n(R) \to BGL(R)$.
-Since we have show that the plus construction can be taken to be functorial,
-we have maps \[(BGL_m(R) \times BGL_n(R))^+ \to BGL(R)^+\].
-[Finish this]
-\end{proof}
+%\begin{proof}
+%We have the group map $\oplus : GL_m(R) \times GL_n(R) \to GL_{m+n}(R) \subset GL(R)$
+%which induces $BGL_m(R) \times BGL_n(R) \to BGL(R)$.
+%Since we have show that the plus construction can be taken to be functorial,
+%we have maps \[(BGL_m(R) \times BGL_n(R))^+ \to BGL(R)^+\].
+%[Finish this]
+%\end{proof}
 
 There is a recognition criteria for $+$-constructions of $BGL(R)$ in terms of homology and $H$-spaces, due to Quillen.
-The proof again uses obstruction theory. See [Gersten].
+The proof again uses obstruction theory. See \cite{Gersten}.
 
 \begin{theorem}
 The plus construction $i : BGL(R) \to BGL(R)^+$ is universal for maps into $H$-spaces. That is, for any map
@@ -115,7 +115,7 @@ a $K$-theory space $K^\square(S)$ by constructing an appropriate group-completio
 Note that the geometric realization of a symmetric monoidal category is a homotopy-associative homotopy-commutative $H$-space
 with the multiplication coming from the monoidal product $\square$.
 We wish to construct a symmetric monoidal category $S^{-1}S$ which describes a group completion of $BS$ so as to make $BS^{-1}S$ be a group-like $H$-space.
-[Grayson]
+\cite{Grayson}
 
 But first, for either of $BS$ or $BS^{-1}S$ to be interesting, we must reduce our scope.
 
@@ -290,7 +290,7 @@ The functor $X \to S^{-1}X$ described by $x \mapsto (0,x)$ induces the map
 \end{equation}
 \end{proposition}
 
-We have the following result due to Quillen, showing us that $B(S^{-1}S)$ is indeed a group completion of $BS$. (See [Grayson])
+We have the following result due to Quillen, showing us that $B(S^{-1}S)$ is indeed a group completion of $BS$. (See \cite{Grayson})
 \begin{theorem}[Quillen]\label{thm:BSgroup}
 Let $S$ be a faithful symmetric monoidal groupoid. Then (\ref{eq:localaction}) is an isomorphism for all $X$ and $q$.
 In particular, $B(S^{-1}S)$ is a group completion of the $H$-space $BS$.
@@ -354,7 +354,7 @@ every $t$ in $T$, there is some $s$ in $S$ and $u$ in $T$ such that $t \square u
 The inclusion functor $\mathbf F(R) \to \mathbf P(R)$ for instance, is cofinal,
 because every projective module is a direct summand of a free module.
 
-We have the following result which allows us to $K_n(T)$, a proof of which is outlined in [Weibel].
+We have the following result which allows us to $K_n(T)$, a proof of which is outlined in \cite{WeibelKbook}.
 
 \begin{theorem}[Cofinality Theorem]
 Let $f : S \to T$ be a cofinal monoidal functor of symmetric monoidal categories. Then
@@ -392,8 +392,8 @@ B(S^{-1}S) \eqv K_0(R) \times BGL(R)^+
 %\end{theorem}
 
 \section{Quillen's $Q$-construction}\label{sec:Qconstruction}
-In [Quillen, 19XX], Quillen proposed another construction for the $K$-theory space.
-Given an exact category $\A$, []
+In \cite{Quillen1973}, Quillen proposed another construction for the $K$-theory space.
+Given an exact category $\A$, 
 we will define a category $Q \A$, and then define $K_n(\A) = \pi_{n+1}(BQ\A)$ for all $n \geq 0$.
 
 \begin{definition}[$Q$-construction]
@@ -416,8 +416,6 @@ C
 \]
 It is clear that composition is well-defined and associative and so $Q\A$ forms a well-defined category.
 \end{definition}
-
-[Set theoretic remark]
 
 \begin{remark}
 Admissible monomorphisms $C \admono C'$ determine a morphism $C \to C'$ by taking $D = C'$ and $D \adepi C'$ as identity.
@@ -479,10 +477,7 @@ Let the map $C_2' \to C_2'/C_1'$ be denoted $q$.
 
 Then the composite $C \to C' \to C''$ corresponds to the layer $(D_1,D_2)$
 where $D_1 = C_1 \times_{C'} C_2'$ and $D_2 = C_2 \times_{C'} C_2'$
-with the isomorphism $\Phi : C \xrightarrow{\cong} D_2/D_1$ given by
-\[
-  C \cong C_2/C_1
-\]
+with the isomorphism $\Phi : C \xrightarrow{\cong} D_2/D_1$.
 This follows from the evident isomorphisms and the fact that
 $D_2$ is the pullback of $C_2 \admono C' \adepi C_2'$.
 \end{proof}
@@ -514,7 +509,7 @@ by the exact functor $F$.
 Functoriality follows since compositions are defined naturally across $Q\A$ and $Q\B$.
 \end{proof}
 
-We present a different proof of the theorem proven by Quillen in [].
+We present a proof of the theorem proven by Quillen in \cite{Quillen1973}.
 
 \begin{theorem}[Quillen]
 Let $\A$ be a small exact category.
@@ -557,13 +552,11 @@ We can now define a group homomorphism $\Theta : K_0(\A) \to \pi_1(BQ\A)$ by
 mapping $[C]$ to the loop $\Qloopz C$ as mentioned. This is a (surjective) group homomorphism
 since exact sequences lead to homotopic loops.
 
-To show $\Theta$ is injective,
-We construct an $\Phi$ from morphisms in $Q\A$ to $K_0(\A)$ by mapping
-the morphism determined by the layer $(D_1,D_2)$ of $C'$ to $D_1$.
-This is additive since
+%To show $\Theta$ is injective,
+%e construct an $\Phi$ from morphisms in $Q\A$ to $K_0(\A)$ by mapping
+%he morphism determined by the layer $(D_1,D_2)$ of $C'$ to $D_1$.
+%his is additive since
 \end{proof}
-
-[Set Theory remark]
 
 \begin{definition}
 Let $\A$ be a small exact category. Then $K\A$ is defined to be the space $\Omega BQ\A$ pointed at $0$
@@ -583,7 +576,7 @@ we define $K(R) := K(\mathbf P(R))$ and consequently
 \[K_n(R) = K_n(\mathbf P(R)).\]
 This matches our original definition for $n = 0$.
 We prove in \S\ref{sec:+=Q} the $+=Q$ Theorem, which implies that this matches with the description of the
-$K_n$ groups defined using the $+$-construction in \S\ref{sec:BGL(R)^+}.
+$K_n$ groups defined using the $+$-construction in \S\ref{sec:BGL(R)plus}.
 \end{definition}
 
 \begin{definition}
@@ -632,7 +625,7 @@ where \textbf{??} is chosen appropriately
 and $B(\textbf{??})$ is contractible.
 Then upon taking the homotopy long exact sequence of the fibration,
 we would have our desired homotopy equivalence $\Omega BQ\A \eqv BS^{-1}S$.
-This sequence of leading up to the theorem is taken from [Weibel].
+This sequence of leading up to the theorem is taken from \cite{WeibelKbook}.
 
 \begin{definition}%[(Give it a name?)]
 Given an exact category $\A$, we define $\E\A$ where
@@ -712,7 +705,6 @@ It follows that this obeys the necessary unit, commutatitivity and coherence law
 and does define a symmetric monoidal structure on $\E_E$.
 The symmetric monoidal functor $S \to \E_E$ follows naturally by mapping
 $C$ to the split-exact sequence $\adexact{C}{C \oplus E}{E}$.
-[]
 It is also faithful.
 \end{proof}
 
@@ -730,7 +722,7 @@ If $\A$ is split exact, each $S^{-1}S \to S^{-1}\E_E$ is a homotopy equivalence.
 Note the sequence $S^{-1}S \to S^{-1}\E_E \to \langle S, \E_E \rangle$ is a fibration.
 It suffices to show that $L = \langle S, \E_E \rangle$ is contractible.
 Note that the monoidal operation on $\E_E$ induces a monoidal operation on $L$,
-making $BL$ a $H$-space. Since $L$ is connected, by [Whitehead] it implies $BL$ is group-like
+making $BL$ a $H$-space. Since $L$ is connected, by \cite{Whitehead} it implies $BL$ is group-like
 and has a homotopy inverse.
 
 Now for any exact sequence $x = (\adexact{C}{C \oplus E}{E})$ we have a diagonal morphism
@@ -784,7 +776,7 @@ Hence we can conclude that in general, $f^*$ is a homotopy equivalence.
 
 \begin{proof}[\textbf{Proof of Theorem \ref{thm:Quillen}}]
 The proof follows from Theorem \ref{thm:splitfibration} if we show that $S^{-1}\E\A$ is contractible.
-Note that $\E\A$ is contractible. [] Any action of $S$ on a contractible category must be invertible. [] %\ref
+Note that $\E\A$ is contractible. Any action of $S$ on a contractible category must be invertible. %\ref
 So we have the homotopy equivalence $\E\A \to S^{-1}\E\A$, concluding that $S^{-1}\E\A$ is contractible.
 \end{proof}
 

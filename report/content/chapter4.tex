@@ -5,7 +5,7 @@ that shall be relevant for construction higher $K$-theory in the next chapter.
 %towards computations of $K$-theory.
 
 In Section \S1, we first recall some basic notions, and introduce homotopy fiber seqeunces.
-In Section \S2, we describe a homotopy theoretic properties of small categories, and prove Quillen's Theorems A and B from [1973].
+In Section \S2, we describe a homotopy theoretic properties of small categories, and prove Quillen's Theorems A and B from \cite{Quillen}.
 In Section \S3, we introduce and mention some properties of $H$-spaces.
 In Section \S4, we describe the $+$-construction on CW complexes. We mention the characterization
 of the $+$-construction by acyclic maps and state the Theorem due to Quillen proving uniqueness up to homotopy
@@ -18,7 +18,7 @@ A map of based spaces $X \to Y$ is a map of the underlying topological spaces wh
 
 We can functorially associate homotopy groups $\pi_n$ to a based space $X$, denoted $\pi_n(X)$. We assume familiarity with the definitions of homotopy and homology groups. 
 $H_*(X;M)$ will refer to the singular homology of $X$ with coefficients in some abelian group $M$, or alternatively local coefficients, i.e. $M$ being a $\pi_1(X)$-module.
-When $M = \Z$, this is referred to as integral homology. See [] for a detailed treatment.
+When $M = \Z$, this is referred to as integral homology. 
 
 A CW complex (or cellular complex) $X$ is a colimit of a filtration of $n$-skeleta, denoted $\emptyset = X_{-1} \subseteq X_0 \subseteq X_1 \subseteq X_2 \subseteq \cdots$
 where $X_0$ is a discrete set of points and $X_{n}$ is a pushout of $X_{n-1}$ via a disjoint union $\cup_\alpha \varphi_\alpha$ of attaching maps $\varphi_\alpha : S^{n-1}_\alpha \to X_{n-1}$ and
@@ -29,7 +29,7 @@ The images of the interiors of the disks $D^n_\alpha$ in $X_n$ are called $n$-ce
 Note that $0$-cells correspond to a set of points, $1$-cells correspond to line segments, $2$-cells to disks, and so on.
 
 The colimit carries the weak topology.
-The homology of CW complexes is particularly tractable. See [Hatcher] for a detailed treatment.
+The homology of CW complexes is particularly tractable. See \cite{Hatcher} for a detailed treatment.
 
 
 \subsection{Homotopy Fiber and Fiber Sequences}
@@ -60,7 +60,7 @@ is called a \emph{homotopy fibration sequence}, and consequently also yields suc
 
 If $f : E \to B$ were a homotopy equivalence, then the homotopy fiber $F(f)$ is weakly contractible, i.e.,
 it has the homotopy groups of a point, $\pi_*F(f) \cong \pi_*(\star)$.
-If $E$ and $B$ have homotopy type of CW complexes, then so is $F(f)$ and by Whitehead's Theorem [], weak homotopy equivalence implies homotopy equivalence.
+If $E$ and $B$ have homotopy type of CW complexes, then so is $F(f)$ and by Whitehead's Theorem \cite{Whitehead}, weak homotopy equivalence implies homotopy equivalence.
 
 Conversely, if the fiber $F(f)$ is contractible, then $f$ is a weak homotopy equivalence, i.e., the induced maps $\pi_n(E) \to \pi_n(B)$ are isomorphisms.
 If $E$ and $B$ have homotopy type of CW complexes, then $f$ is a homotopy equivalence.
@@ -178,10 +178,10 @@ homotopy equivalence $BC \eqv BD$. In particular,
 An equivalence of small categories is a homotopy equivalence.
 \end{corollary}
 
-\begin{remark}
-The converse is not true. If $F : C \to D$ is a homotopy equivalence, then it need not be an equivalence of categories
-in the usual sense. Take for instance  [][]
-\end{remark}
+%\begin{remark}
+%The converse is not true. If $F : C \to D$ is a homotopy equivalence, then it need not be an equivalence of categories
+%in the usual sense. 
+%\end{remark}
 
 \begin{proposition}
 If a small category $C$ has an initial or a final object, then $BC$ is contractible.
@@ -195,8 +195,8 @@ The result follows from the remark made earlier.
 
 \subsection{Quillen's Theorems A and B}
 
-In this section, we prove two theorems originally proven by Quillen in [Quillen 1973],
-which shall be integral towards proving the $+=Q$ Theorem in [].
+In this section, we prove two theorems originally proven by Quillen in \cite{Quillen1973},
+which shall be integral towards proving the $+=Q$ Theorem in Chapter 5.
 
 Theorem A gives sufficient conditions for a functor $F : C \to D$ of small categories to be 
 a homotopy equivalence.
@@ -215,7 +215,7 @@ and \emph{vertical} face and degeneracy maps
 such that the horizontal maps commute with the vertical maps, and both pairs follow
 the required relations among face and degeneracy maps as for simplicial sets.
 In particular, each $X_{\bullet,q}$ and $X_{p,\bullet}$ defines a simplicial set.
-See [] for a detailed treatment of bisimplicial sets.
+See \cite{Bousfield} for a detailed treatment of bisimplicial sets.
 \end{definition}
 
 \begin{definition}
@@ -229,7 +229,7 @@ Alternatively, it is the coend $\int_{p,q \in \Del} X_{p,q} \times \Delta^p \tim
 
 Note there is the \emph{diagonal} functor from bisimplicial sets to simplicial sets
 $\diag(X) \mapsto X_{n,n}$, and it is well-known that $BX$ is homeomorphic to $B \diag(X)$.
-See for instance, [Bousfield]. The following theorem is also well known: (see [Wald 78])
+See for instance, \cite{Bousfield}. The following theorem is also well known: (see \cite{Waldhausen78})
 
 \begin{theorem}\label{thm:bisimplicial}
  Let $f : X \to Y$ be a map of simplicial sets. 
@@ -379,7 +379,7 @@ is an isomorphism, for any commutative ring $k$.
 \end{theorem}
 \section{$+$-construction}
 
-The $+$-construction, devised by <> in [], is a universal way to kill a perfect normal subgroup of the fundamental group of a connected 
+The $+$-construction, devised by Kervaire, is a universal way to kill a perfect normal subgroup of the fundamental group of a connected 
 CW complex, while preserving homology theory. 
 The discussion of the $+$-construction fits into the framework of acyclic maps, which we explore here.
 
@@ -399,7 +399,7 @@ Furthermore, we have the following result characterising acyclic maps:
 Let $X, Y$ be based connected CW complexes. A map $f : X \to Y$ is acyclic if and only if for every $\pi_1(Y)$-module
 $M$, it induces an isomorphism $H_*(X;M) \cong H_*(Y;M)$.
 \end{lemma}
-The proof for this uses Serre Spectral sequences, which we skip and refer the reader to [Weibel].
+The proof for this uses Serre Spectral sequences, which we skip and refer the reader to \cite{Weibel}.
 
 \begin{definition}[relative $+$-construction]
 Let $X$ be a based connected CW complex and $P$ be a perfect normal subgroup of $\pi_1(X)$. 
@@ -423,7 +423,7 @@ Let $X$ be a based connected CW complex and $P$ be a perfect normal subgroup of 
 \end{enumerate}
 \end{theorem}
 The proof of this uses topological obstruction theory. We describe a construction for $1$ in \S\ref{ss:construction}
-and refer the reader to [Berrick] for a full proof of 1 and 2. 3 follows immediately from 2 since we have maps both way which must compose to identity up to homotopy.
+and refer the reader to \cite{Berrick} for a full proof of 1 and 2. 3 follows immediately from 2 since we have maps both way which must compose to identity up to homotopy.
 
 \begin{remark}
 Any group $G$ has a maximal perfect normal subgroup, which we call the \emph{perfect radical}. In fact, it is the subgroup generated by all perfect normal subgroups,
@@ -432,10 +432,10 @@ From now on, for any based CW complex $X$, we will denote by $X^+$ any $+$-const
 \end{remark}
 
 \subsection{Explicit Construction} \label{ss:construction}
-A number of explicit \emph{models} exist for the $+$-construction. Here, we present a construction due to [Kervaire] which constructs $X^+$ by attaching $2$-cells 
+A number of explicit \emph{models} exist for the $+$-construction. Here, we present a construction of $X^+$ by attaching $2$-cells 
 to kill the maximal perfect subgroup of $\pi_1(X)$, and then $3$-cells to recover the integral homology of $X$, making sure
 that the inclusion $X \hookrightarrow X^+$ is acyclic.
-We refer the reader to [Gersten] and [Suslin] for a variety of constructions. 
+We refer the reader to \cite{Gersten} and \cite{Suslin} for a variety of constructions. 
 We will describe more models for $K$-theory in Sections \S3 and \S4.
 
 \subsubsection*{Construction}
@@ -528,7 +528,7 @@ This concludes the result that the stated construction preserves integral homolo
 %Let $\widetilde X \to X$ be the universal cover of $X$.
 
 If this result were to extend to local coefficient systems, this would mean that the map $X \to Z$ is acyclic 
-and forms a model for $X^+$. We do not pursue the full proof here and instead refer the reader to [Rosenberg].
+and forms a model for $X^+$. We do not pursue the full proof here and instead refer the reader to \cite{Rosenberg}.
 Indeed, there is an alternate result in Proposition \ref{prop:acyclic_H_space} which shows that what we have proven suffices
 for the case we are interested in, $BGL(R)^+$, which is what we shall discuss in the next chapter.
 

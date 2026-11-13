@@ -10,6 +10,7 @@
 \usetikzlibrary{calc}
 \usepackage[colorlinks=true,linkcolor=violet,citecolor=violet,urlcolor=violet]{hyperref}
 \usepackage[backend=biber,style=alphabetic]{biblatex}
+\addbibresource{references.bib}
 \setlist{nosep}
 \linespread{1.0}  
 % ---------- Formatting ----------
@@ -98,7 +99,38 @@
 \begin{document}
 \maketitle
 
+% ---------- Front matter: i, ii, iii, ... ----------
+\pagenumbering{roman}
+
+\maketitle
+
+\chapter*{Abstract}
+\addcontentsline{toc}{chapter}{Abstract}
+
+Algebraic $K$-theory associates to a ring $R$ a sequence of abelian groups
+$K_n(R)$ encoding its finitely generated projective modules, in analogy with
+the topological $K$-theory of vector bundles. This thesis gives an
+introduction to the subject, from the classical low-degree groups to
+Quillen's definition of the higher groups.
+
+We begin with projective modules and Swan's theorem, then construct the
+Grothendieck group $K_0$ for rings, symmetric monoidal categories and exact
+categories. Next we study the classical groups $K_1(R) = GL(R)/E(R)$ and
+$K_2(R)$.
+
+After reviewing the required homotopy theory, including classifying spaces of
+categories, $H$-spaces, Quillen's Theorems A and B, and the $+$-construction,
+we define the higher groups $K_n(R)$ in three ways: through the
+$BGL(R)^+$ construction, the $S^{-1}S$ construction, and Quillen's
+$Q$-construction. We show that these agree with the classical groups in low
+degrees and with each other, culminating in the ``$+ = Q$'' theorem.
+
 \tableofcontents
+\clearpage
+
+% ---------- Main matter: 1, 2, 3, ... ----------
+\pagenumbering{arabic}   % this also restarts the count at 1
+
 
 \chapter{Preliminaries}
 \input{content/chapter1.tex}
@@ -115,9 +147,7 @@
 \chapter{Higher $K$-Theory and the $K_n$ Groups} 
 \input{content/chapter5.tex}
 
+\newpage
 % ---------- References ----------
-\nocite{*}
-\bibliographystyle{plain}
-\bibliography{references}
-
+\printbibliography
 \end{document}
