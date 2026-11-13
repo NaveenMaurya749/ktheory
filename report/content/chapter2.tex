@@ -1,6 +1,7 @@
 In this chapter, we will develop the notion of the an abelian group $K_0$ called the Grothendieck Group 
 accross a variety of contexts, which describes the additive properties of (right) projective modules over $R$. 
-First, we discuss the grothendieck group of a ring, then symmetric monoidal categories, and finally exact cateogries.
+
+We define the grothendieck group $K_0$ of a ring, of symmetric monoidal categories, and finally of exact cateogries.
 $K_0(R)$ corresponding to any unital ring $R$ can be defined using all of these settings,
 and we shall show they are equivalent.
 We will also show the defined $K_0(R)$ group is functorial.
@@ -55,20 +56,32 @@ There is an alternative (but equivalent) characterization of $\widetilde{M}$ via
   Then $K(M) \cong \widetilde{M}$ naturally.
 \end{proposition}
 \begin{proof}
+  We contruct a monoid homomorphism $j : M \to K(M)$ and use the univeresal property of $\widetilde{M}$ to conclude the result.
+
+  Define $j(m)$ as the image of the symbol $[m]$ in $K(M)$.
+  Then note that 
+  We specify a group homomorphism $\Phi : K(M) \to \widetilde M$ by mapping the image of $[m]$
+  to $[(m,0)]$. Note this is a well-defined homomorphism since $[(m,0)] + [(n,0)] = [(m+n,0)]$.
+  Furthermore, it is compatible with $j$, i.e. $\Phi \circ j = i$.
+  $\Phi$ is clearly surjective. 
+  For injectivity, note that if $[(m,0)] = [(0,0)]$, then there is some $e \in M$ such that 
+  $m + e = e$. But this implies the image of $m$ in $K(M)$ is $[m] = [m+e] - [e] = [e] - [e] = [0]$.
+
+  Due to the universal property of group completion, this isomorphism is natural.
   %We show that there is an isomorphism $K(M) \to \widewidewidetilde{M}$ which we describe by 
   %mapping the generators $[a]$ to $[(a,0)]$. By the universal property,
   %this has to be canonical. 
 
-  We will show that $K(M)$ satisfies the universal property of $\widetilde{M}$. 
-  Let $F(M)$ represent the free abelian group on the set $M$.
-  The map $i : M \to K(M)$ on $x$ is given by taking the equivalence class of the element $x$.
-  Suppose $\varphi : M \to H$ is a monoid homomorphism to an abelian group $H$. Then define $\widetilde{\varphi}([a])$ as $\varphi(a)$.
-  Suppose $[a]=[b]$, then $[a] + [-b] = [0]$ so $a - b = 0$ and consequently $\varphi(a) - \varphi(b) = 0$. 
-  Thus the map $\widetilde{\varphi}$ is well-defined and clearly
-  a group homomorphism. It is also unique since $\widetilde{\varphi}$ is specified uniquely on the basis of $F(M)$.
+%j.  We will show that $K(M)$ satisfies the universal property of $\widetilde{M}$. 
+ % Let $F(M)$ represent the free abelian group on the set $M$.
+ % The map $i : M \to K(M)$ on $x$ is given by taking the equivalence class of the element $x$.
+ % Suppose $\varphi : M \to H$ is a monoid homomorphism to an abelian group $H$. Then define $\widetilde{\varphi}([a])$ as $\varphi(a)$.
+ % Suppose $[a]=[b]$, then $[a] + [-b] = [0]$ so $a - b = 0$ and consequently $\varphi(a) - \varphi(b) = 0$. 
+ % Thus the map $\widetilde{\varphi}$ is well-defined and clearly
+ % a group homomorphism. It is also unique since $\widetilde{\varphi}$ is specified uniquely on the basis of $F(M)$.
 \end{proof}
 
-\begin{example}[]
+\begin{example}
   Let $R$ be a (unital) ring satisfying the \textit{Invariant Basis Property (IBP)}. That is, $R^m \cong R^n$ implies $m = n$.
   Then the monoid of isomorphism classes of free $R$-modules with the operation $\oplus$ is isomorphic to $\N$, the isomorphism given by the map $R^n \mapsto n$. Consequently, its group completion
   is isomorphic to the abelian group $\Z$. 
@@ -102,6 +115,20 @@ of isomorphism classes of finitely generated projective $R$-modules with the mon
   injective group homomorphism $\Z \to K_0(R)$ given by $n \mapsto R^n$.
 \end{example}
 
+Here is an observation which shows why we restrict our attention to finitely generated projective modules.
+\begin{example}[Eilenberg Swindle]
+Let $R^\infty$ be an infinitely generated free module over $R$.
+Suppose $P$ is a projective module over commutative ring $R$,
+such that $P \oplus Q \cong R^\infty$. In fact, such a $R^\infty$ and $Q$ exists for any projective $P$.
+Then 
+\begin{align*}
+  P \oplus R^\infty &\cong P \oplus (Q \oplus P) \oplus (Q \oplus P) \oplus \cdots \\
+  &\cong R^\infty
+\end{align*}
+If we had taken considered the group completion of the category of all projective modules over $R$,
+we would have $[P] = 0$ in $K_0$, and $K_0(R) = 0$.
+\end{example}
+
 %\subsection{Rank and $H_0$} 
 %Recall the notion of rank of a projective module. Let $R$ be a commutative ring and $P$ be a projective $R$-module. For any prime ideal $\p$ of $R$, we can look at the local ring
 %$R_\p$. Its quotient by the maximal ideal $k(\p) = R_\p/\p R_\p$ is a field and $P \otimes k(\p)$ becomes a projective $k(\p)$-module, which must be free since $k(\p)$ is a field. Denote its rank by $\text{rank}_P(\p)$.
@@ -128,13 +155,49 @@ of isomorphism classes of finitely generated projective $R$-modules with the mon
 
 Suppose we have (unital) rings $R$ and $S$ such that we have an equivalence of the respective categories of right modules:
 \begin{align*}
-  \textbf{mod-}R \leftrightharpoons\textbf{mod-}S
+  \textbf{mod-}R \eqv \textbf{mod-}S
 \end{align*}
 Then we say that $R$ and $S$ are \textbf{Morita equivalent}.
 
 A consequence of Morita Equivalence is that $R$ and $S$ yield isomorphic $K_0$ groups.
+An important example of Morita Equivalence is 
+
+\begin{proposition}[Morita Invariance of $K_0$]
+For any unital ring $R$, we have
+  \[\textbf{mod-}R \eqv \textbf{mod-}M_n(R)\]
+and consequently
+\[
+K_0(R) \cong K_0(M_n(R))
+\]
+\end{proposition}
+%\begin{proof}
+%Note that the infinite general linear matrices over Mn (A) and A are
+%canonically equivalent, i.e. GL(Mn (A)) = GL(A) in particular their infinite
+%idempotent matrices are also equivalent Idem(Mn (A)) = Idem(A). Conse-
+%quently by the correspondence between idempotent matrices and projective
+%modules their monoid of finitely generated protectives are the same meaning
+%their group completions are isomorphic.
+%\end{proof}
 
 \subsection{Base Change and Transfer}
+
+Suppose we have a ring homomorphism $f : R \to S$ of unital rings.
+Then this induces a \emph{base change functor} $f^* : \mathbf P(R) \to \mathbf P(S)$
+by extension of scalars $P \mapsto P \otimes_R S$. 
+This functor is additive in the sense that
+\[
+f^*(P \oplus Q) \cong f^*(P) \oplus f^*(Q)
+\]
+In particular, if $P \cong Q$, then $f^*(P) \cong f^*(Q)$.
+This gives us a group homomorphism 
+\[
+K(f^*) : K_0(R) \to K_0(S)
+\]
+Note that this implies that $K_0$ is a (covariant) functor from $\mathbf{Ring} \to \Ab$.
+
+Conversely, we also have a \emph{transfer functor} $f_* : \mathbf P(S) \to \mathbf P(R)$ given 
+by restriction of scalars, which is also additive and gives us
+$K(f_*) : K_0(S) \to K_0(R)$.
 
 \section{$K_0$ of a Symmetric Monoidal Category}
 
@@ -183,15 +246,25 @@ Through the rest of this text, we will mostly gloss over concerns about coherenc
 monoidal categories.
 The reader is suggested to refer to [MacLane] for the precise description of symmetric monoidal categories
 and why the pentagonal, traingular and hexagonal diagrams suffice for coherence.
+
 \begin{example}
 Any category with either a direct sum $\oplus$ is symmetric monoidal with $\square = \oplus$,
-which includes all abelian categories. In particular, $\mathbf F(R), \mathbf P(R), \mathbf M(R)$
-are all symmetric monoidal with $\square = \oplus$.
+which includes all abelian categories. In particular, for any unital ring $R$, 
+\begin{itemize}
+  \item 
+$\mathbf F(R)$ (category of finitely generated free modules over $R$),
+\item 
+$\mathbf P(R)$ (category of finitely generated projective modules over $R$),
+\end{itemize}
+are both symmetric monoidal with $\square = \oplus$.
 the category of all finitely generated modules over $R$ are all examples of symmetric monoidal categories.
-
 
 Categories with finite coproducts $\sqcup$ as well as categories with finite products similarly 
 are symmetric monoidal with $\square = \sqcup$ and $\square = \times$ respectively.
+\end{example}
+
+\begin{example}
+Given a topological space $X$, the category of (real or complex) vector bundles is symmetric monoidal with $\square = \oplus$.
 \end{example}
 
 \begin{definition}[$K_0$ of a symmetric monoidal category]
@@ -208,17 +281,23 @@ $K_0(S)$ is the group completion of the (abelian) monoid of isomorphism classes 
 \end{proposition}
 
 \begin{example}
-Finite sets
+Given a commutative ring $R$, the category $\mathbf {Pic}(R)$ of algebraic line bundles (invertible modules) over $R$
+is symmetric monoidal with $\square = \otimes$ and $e = R$. Since $\mathbf {Pic}(R)$ is already a group, 
+we have $K_0(\mathbf{Pic}(R)) = \mathbf{Pic}(R)$.
 \end{example}
 
-\begin{example}
-Burnside Ring, Representaion ring
-\end{example}
+%\begin{example}
+%Finite sets
+%\end{example}
+
+%\begin{example}
+%Burnside Ring, Representaion ring
+%\end{example}
 
 \section{$K_0$ of an Exact Category}
 We now describe $K_0$ in yet another context.
 The notion of an exact category was introduced by Quillen in [], where the notion 
-is helpful for building higher $K$-Theory which we shall see in Chapter 4.
+is helpful for building higher $K$-Theory which we shall see in Chapter 5.
 
 \begin{definition}[Exact category]
 An exact category is a pair $(\C,\E)$ where $\C$ is an additive category fully embedded in some ambient abelian category $\A$,
@@ -312,16 +391,16 @@ in $\E$ is split, i.e., isomorphic to a sequence $0 \to C \to C \oplus D \to D \
 In this case, this $K_0(\C) \cong K_0^\oplus(\C)$ naturally if $\C$ is viewed as symmetric monoidal with respect to $\oplus$. 
 \end{definition}
 
-$\mathbf P(R)$ is an example of a split-exact category. It will turn out in Chapter 4
+$\mathbf P(R)$ is an example of a split-exact category. It will turn out in Chapter 5
 that for such categories, the higher $K_n$-groups defined are also isomorphic. 
 
-\begin{example}
-$K_0$ of a scheme
-\end{example}
+%\begin{example}
+%$K_0$ of a scheme
+%\end{example}
 
-\begin{example}
-$G_0$
-\end{example}
+%\begin{example}
+%$G_0$
+%\end{example}
 
 %\begin{proposition}[Fundamental Theorem for $K_0$ of regular rings]
 %\end{proposition}

@@ -1,5 +1,5 @@
 The subject of K-Theory was historically concerned with studying vector bundles on spaces.
-In Algbraic $K$-Theory, the objects of interest are projective modules over a ring, and vector bundles over
+In Algbraic $K$-Theory, the primary objects of interest are projective modules over a ring, and vector bundles over
 schemes.
 
 \section{Projective Modules}
@@ -33,9 +33,9 @@ Let $R$ be as before and $P$ be an (right) $R$-module. Then the following are eq
 \end{itemize}
 \end{proposition}
 
-\begin{proof}
-  
-\end{proof}
+%\begin{proof}
+%  
+%\end{proof}
 
 \subsection{Basic Properties of Projective Modules}
 
@@ -58,9 +58,9 @@ It is a question of interest to characterize when are projectives are free.
 \begin{proposition}
 If $R$ is a field or a division ring, then all (right) projective modules over $R$ are free. 
 \end{proposition}
-\begin{proof}
+%\begin{proof}
 
-\end{proof}
+%\end{proof}
 
 We also have the following result for commutative rings $R$: 
 
@@ -89,14 +89,26 @@ To construct more interesting examples of projective modules, we have the follow
 [See [] for a treatment on patching vector bundles.]
 
 \subsection{Open Patching}
-Let $R$ be a 
+Let $R$ be a commutative ring. Let $s_1, \ldots s_n \in R$ be such that 
+$s_1R + \cdots + s_nR = R$. That is, $D(s_i) \cong \text{Spec}(R[\frac{1}{s_i}])$ cover $\text{Spec}(R)$.
+Suppose we are given $g_{ij} \in GL_n(R[\frac{1}{s_is_j}])$ following the \emph{cocycle conditions:}
 
-- Patching along localizations \\
-- Milnor Patching
+\begin{enumerate}
+\item $g_{ii} = 1$ for all $i$.
+  \item $g_{ij} g_{jk} = g_{ik}$ in $GL_n(R[\frac{1}{s_i s_j s_k}])$ for every $i,j,k$.
+\end{enumerate}
 
-\section{Idempotence Criteria for Projective Modules}
-Observe that for a ring $R$ and a projective (right) $R$-module $P$,
-we have 
+Then 
+\[
+\  P = \left\{(x_1, \ldots, x_c) \in \prod\limits_{i = 1}^c \left(R\left[\frac{1}{s_i}\right]\right)^n : g_{ij}(x_j) = x_i \text{ in } R\left[\frac{1}{s_is_j}\right]^n \text{ for all } i, j\right\} 
+\]
+is a finitely generated projective $R$-module.
+
+%\section{Idempotence Criteria for Projective Modules}
+%Observe that for a unital ring $R$ and a projective (right) $R$-module $P$,
+%suppose $Q$ is such that $P \oplus Q \cong R^n$.
+%This describes an idempotent element $e \in M_n(R)$ such that $P = e(R^n)$ and.
+%Any other choice of an idempotent $f$ such that $e(R^n) = f(R^n)$ leads to a conjugation
 
 \section{Swan's Theorem}
 
@@ -104,20 +116,12 @@ The following result due to Swan [] shows why projective modules are the correct
 algebraic analogue to vector bundles in the topological setting. 
 
 \begin{theorem}
-Let $X$ be a compact Hausorff space. Then the functor $C^\infty(X)$ taking $X$ 
+  Let $\mathbb F$ be either $\mathbb R$ or $\mathbb C$.
+  Let $X$ be a compact Hausorff space, and write $R$ for $C^0(X,\mathbb F)$. Consider the \emph{global sections functor} 
+  $\Gamma : E \mapsto \Gamma(E,\mathbb F)$ from vector bundles over $X$ to projective modules over $R$.
+  Then $\Gamma$ is an equivalence of categories.
 \end{theorem}
 
-This does not illustrate why we study projective modules over non-commutative rings though.
-We shall see in Chapter 2, that due to Morita Equivalence,
-
-- Projective modules <-> vector bundles \\
-- Swan's Theorem
-
-Here is a result which shall show why we restrict our attention to finitely generated projective modules.
-
-\begin{example}[Eilenberg Swindle]
-Suppose $P$ be a projective module over commutative ring $R$, then 
-Let $V = R \oplus R \oplus R \cdots$ be a countable direct sum of a commutative ring $R$.
-Then note that $W = V \oplus V$ can be put into a bijection with $V$ (due to the bijection $2 \times \N \cong \N$).
-\end{example}
+The algebraic analogue of vector bundles are \emph{locally free sheaves over schemes},
+which are an enrichment of the category of projective modules over unital rings.
 
