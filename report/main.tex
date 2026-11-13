@@ -32,6 +32,7 @@
 \newcommand{\Cat}{\mathbf{Cat}}
 \newcommand{\Sets}{\mathbf{Sets}}
 \newcommand{\Top}{\mathbf{Top}}
+\newcommand{\Ab}{\mathbf{Ab}}
 \newcommand{\Del}{\mathbf{\Delta}}
 \newcommand{\sSet}{\mathbf{sSet}}
 \DeclareMathOperator*{\id}{id}
@@ -39,6 +40,9 @@
 \DeclareMathOperator*{\Aut}{Aut}
 \DeclareMathOperator*{\Spec}{Spec}
 \DeclareMathOperator*{\St}{St}
+\DeclareMathOperator*{\diag}{diag}
+\DeclareMathOperator*{\colim}{colim}
+\newcommand{\hocolim}{\mathop{\underset{\xrightarrow{\hphantom{\mathrm{hocolim}}}}{\mathrm{hocolim}}}\limits}
 \newcommand{\0}{\mathbf{0}}
 \newcommand{\1}{\mathbf{1}}
 \newcommand{\2}{\mathbf{2}}
@@ -51,6 +55,9 @@
 \newcommand{\C}{\mathcal{C}}
 \newcommand{\E}{\mathcal{E}}
 \newcommand{\refl}{\mathsf{refl}}
+\newcommand{\lr}[1]{\langle #1 \rangle}
+\newcommand{\To}{\Rightarrow}
+\newcommand{\comma}{\backslash}
 \newcommand{\back}{\leftarrow}
 \newcommand{\exact}[3]{0 \to #1 \to #2 \to #3 \to 0}
 \newcommand{\grpexact}[3]{1 \to #1 \to #2 \to #3 \to 1}
@@ -77,6 +84,12 @@
 }
 \makeatother
 \makeatletter
+\newcommand{\varhocolim}{\mathop{\vphantom{\mathrm{hocolim}}\mathpalette\varhocolim@{}}\nmlimits@}
+\newcommand{\varhocolim@}[2]{\vtop{\m@th\ialign{##\cr
+  \hfil$#1\mathrm{hocolim}$\hfil\cr
+  \noalign{\nointerlineskip\kern1.5\ex@}
+  \hbox{$#1\longrightarrow$}\cr
+  \noalign{\nointerlineskip\kern-\ex@}\cr}}}
 \makeatother
 % ---------- Title ----------
 \title{An Introduction to Higher Algebraic K-Theory}

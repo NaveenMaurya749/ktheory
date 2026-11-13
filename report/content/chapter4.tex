@@ -68,7 +68,7 @@ There exists a functor $|-| : \sSet \to \Top$ which is left-adjoint to the singu
 naturally in $X$ and $Y$.
 \end{proposition}
 We can define $|-|$ to be the functor taking $X$ to the coend $\int_{\mathbf n \in \Del} X_n \times \Delta^n$ or equivalently,
-the colimit $\varinjlim\limits_{\Delta^n \to X} \Delta^n$ in the slice category $\Delta \downarrow X$.
+the colimit $\varinjlim\limits_{\Delta^n \to X} \Delta^n$ in the slice category $\Delta \comma X$.
 The result follows due to Yoneda's Lemma. See [Maclane].
 Furthermore, $|X|$ has a natural CW structure induced by CW structures on $\Delta^n$. 
 
@@ -95,7 +95,7 @@ Furthermore, for any small category $C$, $BC$ is the colimit (with the weak topo
 the directed system of the functors $B \mathbf n \to BC$ coming from $\mathbf n \to C$ and the   
 morphisms coming from factorizations $\mathbf i \to \mathbf n \to C$.
 
-\begin{proposition}
+\begin{proposition}\label{Bfunctorial}
 A functor $F : C \to D$ of small categories determines a cellular map $BF : BC \to BD$. Further,
 $B(\id_C) : BC \to BC$ is the identity map on $BC$, and for functors $F : C \to D, G : D \to E$, we have
 $B(G \circ F) = BG \circ BF$.
@@ -133,12 +133,36 @@ $e$ such that
 \end{enumerate}
 \end{definition}
 Additionally, we say that a $H$-space is homotopy-associative or homotopy-commutative if those respective properties hold up to homotopy.
-A detailed description is available in [].
 
 Topological groups are trivially examples of $H$-spaces. A class of illuminating nontrivial examples come from $n$-th loop spaces $\Omega^n X$ of some based space $X$, where the multiplication is
 given by concatenation of paths.
 
-The (path) connected components of a homotopy-associative $H$-space determine a monoid. % One can also group-complete a $H$-space.
+We refer the reader to [Whitehead] for basic facts about $H$-spaces, some of which we state.
+
+Similar to group completions of monoids, it is a sensible question to ask for a universal 
+way to complete a homotopy-commutative homotopy-associative $H$-space into having an \emph{homotopy inverse}. 
+
+Suppose $X$ is a homotopy-commutative homotopy-associative $H$-space. Then its set of connected components form
+an abelian monoid, and $H_0(X;\Z)$ is the monoid ring $\Z[\pi_0(X)]$.
+Its integral homology $H_*(X;\Z)$ is an associative graded-commutative ring via the Pontryagin product.
+
+\begin{definition}
+ A \emph{group-like} $H$-space $X$ is a homotopy-associative homotopy-commutative with
+ a homotopy inverse, that is a map $\nu : X \to X$ such that the composites 
+ \[
+  x \mapsto \mu(x, \nu(x)) \text{ and } x \mapsto \mu(\nu(x), x)
+ \]
+ are homotopic to the constant map at $e$.
+\end{definition}
+
+\begin{theorem}
+Let $X$ be a homotopy-associative, homotopy-commutative $H$-space. A \emph{group completion}
+of $X$ is a $H$-space map $X \to Y$ such that $\pi_0(X) \to \pi_0(Y)$ is a group completion of the abelian monoid $\pi_0(X)$,
+and the natural map from the localization of the homology ring
+\[\pi_0(X)^{-1}H_*(X;k) \to H_*(Y;k)\]
+is an isomorphism, for any commutative ring $k$.
+\end{theorem}
+
 
 \subsubsection{Homotopy Fiber and Fiber Sequences}
 
@@ -173,6 +197,191 @@ If $E$ and $B$ have homotopy type of CW complexes, then so is $F(f)$ and by Whit
 Conversely, if the fiber $F(f)$ is contractible, then $f$ is a weak homotopy equivalence, i.e., the induced maps $\pi_n(E) \to \pi_n(B)$ are isomorphisms.
 If $E$ and $B$ have homotopy type of CW complexes, then $f$ is a homotopy equivalence.
 
+\subsection{Homotopy Theoretic Aspects of Categories}
+
+Owing to the geometric realization functor $B : \Cat \to \Top$, we can 
+think of small categories as topological spaces via $B$.
+This allows us to extend topological notions to categories by viewing them through their geometric realization. 
+
+By abuse of notation, we will make statements such a category $C$ is contracible, or connected, etc. (any homotopy-theoretic property)
+if its geometric realization is so. 
+If a functor $F : C \to D$ induces a homotopy equivalence $BF : BC \to CD$, then we say that $F : C \to D$ is a homotopy equivalence,
+and the categories $C$ and $D$ are homotopy equivalent.
+
+\begin{proposition}
+A natural transformation $\eta : F \Rightarrow G$ between functors $F, G : C \to D$
+describes a homotopy $BC \times [0,1] \to BD$ which we denote $B\eta : BF \To BG$.
+\end{proposition}
+\begin{proof}
+We can view $\eta : F \To G$ as a functor $C \times \mathbf 2 \to D$ whose restriction
+to $C \times {0}$ is $F$ and the restriction to $C \times {1}$ is $G$. 
+Upon taking the geometric realization, we are done.
+\end{proof}
+
+A consequence is that an adjoint pairs of functors $L : C \to D, R : D \to C$ 
+with natural transformations $LR \To \id_D$ and $\id_C \To RL$, leads to a 
+homotopy equivalence $BC \eqv BD$. In particular, 
+
+\begin{corollary}
+An equivalence of small categories is a homotopy equivalence.
+\end{corollary}
+
+\begin{remark}
+The converse is not true. If $F : C \to D$ is a homotopy equivalence, then it need not be an equivalence of categories
+in the usual sense. Take for instance  [][]
+\end{remark}
+
+\begin{proposition}
+If a small category $C$ has an initial or a final object, then $BC$ is contractible.
+\end{proposition}
+\begin{proof}
+Let $C$ have an initial object $c_0$, then the (unique) functor $F : C \to \mathbf 1$
+has a left adjoint  $L : \mathbf 1 \to C$ given by $0 \mapsto c_0$.
+Dually, if $C$ has a final object $c_1$, then $F$ has a right adjoint $R : \mathbf 1 \to C$ given by $0 \mapsto c_1$.
+The result follows from the remark made earlier.
+\end{proof}
+
+\subsubsection{Fundamental Group of a Category}
+
+\subsection{Quillen's Theorems A and B}
+
+In this section, we prove two theorems originally proven by Quillen in [Quillen 1973],
+which shall be integral towards proving the $+=Q$ Theorem in [].
+
+Theorem A gives sufficient conditions for a functor $F : C \to D$ of small categories to be 
+a homotopy equivalence.
+Theorem B gives sufficient conditions to create homotopy fibration sequences from
+functors $F : C \to D$.
+
+But first, we introduce the notion of a bisimplicial set and some of its properties.
+
+\begin{definition}
+A \emph{bisimplicial set} $X$ is a contravariant functor $\Del \times \Del \to \Sets$.
+Alternatively, it is a doubly indexed family $X_{p,q}$ of sets, together with
+\emph{horizontal} face and degeneracy maps
+\[\partial^h_i : X_{p,q} \to X_{p-1,q} \text{ and } \sigma^h_i : X_{p,q} \to X_{p+1,q}\]
+and \emph{vertical} face and degeneracy maps
+\[\partial^v_i : X_{p,q} \to X_{p,q-1} \text{ and } \sigma^v_i : X_{p,q} \to X_{p,q+1}\]
+such that the horizontal maps commute with the vertical maps, and both pairs follow
+the required relations among face and degeneracy maps as for simplicial sets.
+In particular, each $X_{\bullet,q}$ and $X_{p,\bullet}$ defines a simplicial set.
+See [] for a detailed treatment of bisimplicial sets.
+\end{definition}
+
+\begin{definition}
+The \emph{geometric realization} of a bisimplicial set $X$
+is the cellular complex $BX$ given by taking the disjoint union of $X_{p,q} \times \Delta^p \times \Delta^q$
+and identifying its horizontal and vertical faces with the appropriate
+$\Delta^{p-1} \times \Delta^q$ or $\Delta^p \times \Delta^{q-1}$.
+
+Alternatively, it is the coend $\int_{p,q \in \Del} X_{p,q} \times \Delta^p \times \Delta^q$.
+\end{definition}
+
+Note there is the \emph{diagonal} functor from bisimplicial sets to simplicial sets
+$\diag(X) \mapsto X_{n,n}$, and it is well-known that $BX$ is homeomorphic to $B \diag(X)$.
+See for instance, [Bousfield]. The following theorem is also well known: (see [Wald 78])
+
+\begin{theorem}\label{thm:bisimplicial}
+ Let $f : X \to Y$ be a map of simplicial sets. 
+ \begin{enumerate}
+    \item If each simplicial map $X_{p,\bullet} \to Y_{p,\bullet}$ is a homotopy equivalence,
+    so is $BX \to BY$.
+    \item If $N$ is the nerve of a category $C$, though of as a bisimplicial set which is constant
+    in the second coordinate,
+    and $f^{-1}(c, _\bullet) \to f^{-1}(c', _\bullet)$ is a homotopy equivalence for every $c \to c'$ in $C$,
+    then each $B(f^{-1}(c, _\bullet)) \to BX \to BC$ is a homotopy equivalence.
+ \end{enumerate}
+\end{theorem}
+
+Using this, we prove a lemma which eventually helps us prove Theorems A and B.
+\begin{lemma}[Quillen] \label{lemma:bisimplicial}
+If $F : C \to D$ is a functor, the evident functor $D \comma F \to C$ given by mapping $(d, d \to Fc)$ to $c$
+is a homotopy equivalence.
+\end{lemma}
+\begin{proof}
+Let $X$ denote the bisimplicial set where $X_{p,q}$ is the set of all pairs of sequences
+\[
+(d_q \to \cdots \to d_0 \to F(c_0), c_0 \to \cdots \to c_p)
+\]
+with the horizontal and vertical faces inherited from the nerves of $C$ and $D$.
+Consider the projection $X \to NC$ which preserves only the second sequence in the pair.
+Note that the discrete set $NC_p$ is the set of all sequecnces $c_0 \to \cdots \to c_p$,
+and its inverse image is isomorphic to the nerve of $D \comma F(c_0)$.
+$D \comma F(c_0)$ is contractible since it has a terminal object $(c_0,\id_{F(c_0)})$.
+Using Theorem \ref{thm:bisimplicial}, from the homotopy fibration sequence we get $BX \xlongrightarrow{\eqv} BC$.
+The simplicial set $\diag(X)$ will be isomorphic to the nerve of $D \comma F$, and thus we have the composite
+$B(D \comma F) \xlongrightarrow{\eqv} BX \xlongrightarrow{\eqv} BC$, which concludes the proof.
+
+\end{proof}
+
+Now, we are in a position to prove Theorem A. 
+
+\begin{theorem}[Quillen's Theorem A]\label{thm:A}
+Let $F : C \to D$ be a functor of small categories. If the category $d \comma F$ is contractible
+for every object $d$ in $D$, then $F$ is a homotopy equivalence. 
+\end{theorem}
+\begin{proof}
+Consider the comma category $D \comma F$ and the evident functors $D \comma F \to C$
+and $D \comma F \to D^{op}$ given by mapping $(d, d \to Fc)$ to $c$ and $d$ respectively.
+Note that $B(D\comma F) \to BC$ is a homotopy equivalence by \ref{lemma:bisimplicial}.
+
+We have a functor $D\comma F \to D\comma\id_D$ given by mapping $(d, d \to Fc)$ to $(d, \id_d)$,
+and a functor $D \comma \id_D \to D^{op}$ given by mapping $(d,d \to Fc)$ to $d$. The latter is a homotopy equivalence
+since it is an equivalence of categories.
+
+But we have a commutative diagram of categories 
+\[
+\begin{tikzcd}
+D^{op} \arrow[d, equal] & D\comma F \arrow[l] \arrow[d] \arrow[r] & C \arrow[d] \\
+D^{op} & D \comma \id_D \arrow[l] \arrow[r] & D
+\end{tikzcd}
+\]
+So it suffices to show that $D \comma F \to D^{op}$ is a homotopy equivalence.
+Let $X$ be the bisimplicial set of Lemma \ref{lemma:bisimplicial}. Then the map $B(D \comma F) \xrightarrow{\pi} B D^{op}$
+factors as $B(D \comma F) \eqv BX \to BD^{op}$. The image of the simplicial map $\pi_{\bullet,q} : X_{\bullet,q} \to (ND^{op})_q$
+is the discrete set of all sequences $d_q \to \cdots \to d_0$ in $D$.
+For any such sequence, the inverse image in $X_{\bullet, q}$ is isomorphic to the nerve of $d_0 \comma F$.
+Since we assumed that the latter to be contractible, by Theorem \ref{thm:bisimplicial},
+we have the desired homotopy equivalence $B(D \comma F) \xlongrightarrow\eqv BX \xlongrightarrow\eqv BD$.
+\end{proof}
+
+And then we have Theorem B, which will later be used to construct homotopy fibration sequences of categories.
+
+\begin{theorem}[Quillen's Theorem B]\label{thm:B}
+ Let $F : C \to D$ be a functor of small categories such that every morphism $d \to d'$ in $D$
+ induces a homotopy equivalence $d \comma F \to d' \comma F$. Then for any object $d$ of $D$,
+ the geometric realization of the sequence
+ \[
+ d \comma F \to C \to D
+ \]
+ is a homotopy fibration sequence. Consequently, we have a long exact sequence 
+ \[
+ \cdots \to \pi_{n+1}(BD) \xrightarrow{\partial} \pi_n B(d \comma F) \xrightarrow{j} \pi_n BC \xrightarrow{F}\pi_n BD \to \cdots
+ \]
+\end{theorem}
+\begin{proof}
+Consider the projection $\pi : X \to N(D^{op})$ as in Theorem A (\ref{thm:A}).
+Since the inverse image $\pi^{-1}(d)$ for any $d \in D$ is the nerve of $d \comma F$
+by the same argument, and we have the condition that $d \to d'$ induces $d \comma F \to d' \comma F$ is 
+a homotopy euqivalence, we can use Theorem \ref{thm:bisimplicial} to deduce that
+$B(d \comma F) \to BX \to BD^{op}$ is a homotopy fibration sequence.
+
+Since $BX \cong B(\diag X) \cong B(D \comma F)$, we have $B(d \comma F) \to B(D \comma F) \to BD^{op}$ 
+is a fibration sequence.
+Similarly, $d \comma \id_D \to D \comma \id_D \to D^{op}$ is also a fibration sequence.
+Consider the diagram
+\[
+\begin{tikzcd}
+D^{op} \arrow[d, equal] & D\comma F \arrow[l] \arrow[d, "F"] & d \comma F \arrow[d] \arrow[l] \\
+D^{op} & D \comma \id_D \arrow[l, "\eqv"'] & d \comma \id_D \arrow[l] 
+\end{tikzcd}
+\]
+Note the $d \comma \id_D$ is contractible. So $D \comma \id_D \xrightarrow{\eqv} D^{op}$ is an equivalence,
+giving us the fibration sequence $B(d \comma F) \to B(D \comma F) \to B(D^{op}) = BD$.
+The theorem follows from the fact that 
+$j : d \comma F \to BC$ induces $B(D \comma F) \xrightarrow{\eqv} BC$.
+
+\end{proof}
 \subsection{$+$-construction on a connected CW complex}
 
 The $+$-construction, devised by <> in [], is a universal way to kill a perfect normal subgroup of the fundamental group of a connected 
@@ -379,7 +588,7 @@ This invites some discussion.
 Apart from the upcoming models via $S^{-1}S$ and $Q$-constructions, we can make the following argument to show that
 the constructions of $BGL(R)^+$ can be performed functorially.
 
-We can first define $BGL(\Z)^+$ and take a homotopy pushout (using the mapping cylinder) via the canonical map $\Z \to R$ which induces $BGL(\Z) \to BGL(R)$.
+We can first define $BGL(\Z)^+$ and take a homotopy pushout (using the double mapping cylinder) via the canonical map $\Z \to R$ which induces $BGL(\Z) \to BGL(R)$.
 Note that the homotopy pushout 
 \[
 \begin{tikzcd}
@@ -387,7 +596,7 @@ Note that the homotopy pushout
   BGL(R) \arrow[r] & BGL(R)^+
 \end{tikzcd}
 \]
-is a plus construction for $BGL(R)$.
+is a plus construction for $BGL(R)$ and is functorial in $\Z \to R$.
 
 \subsection{$H$-Space Properties of $BGL(R)^+$}
 
@@ -409,24 +618,24 @@ The proof again uses obstruction theory. See [Gersten].
 \begin{theorem}
 The plus construction $i : BGL(R) \to BGL(R)^+$ is universal for maps into $H$-spaces. That is, for any map
 $f : BGL(R) \to H$ for some $H$-space $H$, we have a map $g : BGL(R)^+ \to H$ so that $f = g i$,
-such that $g$ is unique up to weak homotopy, i.e. the induced maps $\pi_n(BGL(R)^+) \to \pi_n(H)$ is independent of $g$.
+such that $g$ is unique up to weak homotopy, i.e. the induced maps $\pi_n(BGL(R)^+) \to \pi_n(H)$ are independent of $g$.
 \end{theorem}
 
 \begin{proposition}\label{prop:acyclic_H_space}
 If further $f_* : H_*(BGL(R);\Z) \xlongrightarrow{\cong} H_*(H;\Z)$ is an isomorphism, then $f$ is acyclic
 and $g$ is a homotopy equivance.
 \end{proposition}
-\begin{proof}
-It suffices to prove that $f$ is acyclic.
-\end{proof}
+%\begin{proof}
+%It suffices to prove that $f$ is acyclic.
+%\end{proof}
 
 \section{$S^{-1}S$ construction}
 For a symmetric monoidal category $(S, \square)$, the construction of Chapter 2 for $K_0$ may be extended to 
 a $K$-theory space $K^\square(S)$ by constructing an appropriate group-completion of $S$ with respect to the monoidal operation $\square$.
 
 Note that the geometric realization of a symmetric monoidal category is a homotopy-associative homotopy-commutative $H$-space
-with the multiplication coming from the monoidal product $\square$. This is because []  
-We wish to construct a symmetric monoidal category $S^{-1}S$ which describes a ``group completion" of $BS$ so as to make $BS^{-1}S$ be a group-like $H$-space.
+with the multiplication coming from the monoidal product $\square$.
+We wish to construct a symmetric monoidal category $S^{-1}S$ which describes a group completion of $BS$ so as to make $BS^{-1}S$ be a group-like $H$-space.
 [Grayson]
 
 But first, for either of $BS$ or $BS^{-1}S$ to be interesting, we must reduce our scope.
@@ -512,7 +721,7 @@ of abelian monoids. (The component of $s$ maps to the component of $(s,e)$)
 
 Further, $\pi_0(S^{-1}S)$ is an abelian group since for the connected coponent of $(m,n)$ we have we have inverse $(n,m)$ 
 due to the isomorphism $(e,e) \xlongrightarrow{\cong} (m,n) \square (n,m)$
-given by the mapping component $[(c_{mn},c^{-1}_{mn})]$ where $c_{mn}$ is the symmetric braiding given by isomorphism $m \square n \to n \square m$ in $S$.
+given by the mapping component $[(c_{mn},c^{-1}_{mn})]$ where $c_{mn}$ is the symmetric braiding isomorphism $m \square n \cong n \square m$ in $S$.
 It is abelian due to $S$ being symmetric. 
 
 %(Warning: these isomorphisms $(e,e) \to (m,n) \square (n,m)$ are not natural in $m, n$ due to both an isomorphism and its inverse being used in the definition.)
@@ -549,12 +758,68 @@ By construction, it is the inverse to $G \to \pi_0(S^{-1}S)$.
 \end{proof}
 This shows our definition matches the definition of $K_0(S)$ in Chapter 2.
 
-\subsection{Group Completions of $BS$}
-We turn our attention to 
+\subsection{Actions on other Categories}
+\begin{definition}
+A monoidal category $S$ is said to \emph{act upon} a category $X$ by a functor $\boxtimes : S \times X \to X$,
+if there are natural isomorphisms 
+  \[s \square  (t\boxtimes  x) \cong (s\square t) \boxtimes  x \qquad \text{ and } \qquad e\boxtimes  x \cong x\]
+for $s,t \in S$ and $x \in X$,
+satisfying the coherence conditions for associativity and unit law, i.e. pentagonal and triangular diagrams of \ref{symmetric_monoidal_category}.
+\end{definition}
 
-\begin{theorem}
-If $S$
+For instance, $S$ acts on itself by $\square$. If $X$ is a discrete category (a set), then $S$ acts on $X$ exactly when the monoid of isomorphism classes of $S$ 
+acts on $X$. 
+
+\begin{definition}[Translation category]
+If $S$ acts upon $X$, then the \emph{translation category} $\langle S, X \rangle$ is the category with the same objects as $X$, and morphisms $x \to y$
+are equivalence classes of pairs $(s, s \boxtimes x \to y)$ for some $s \in S$.
+
+Two pairs $(s,s \boxtimes x \to y)$ 
+and $(t, t \boxtimes x \to y)$ are considered equivalent if there is an isomorphism $s \cong t$ such that the 
+composite morphism $t \boxtimes x \cong s \to y$ is the same as $t \boxtimes x \to y$.
+\end{definition}
+
+\begin{example}
+Given a category $X$ such that $S$ acts on $X$ by $\boxtimes$, we will write $S^{-1}X$ for the category $\lr {S, S \times X}$ with the action
+given by $s \boxtimes (t,x) = (s \square t, s \boxtimes x)$.
+Note that if $X = S$, then this recovers $S^{-1}S$.
+\end{example}
+
+\begin{remark}\label{translation contractible}
+If $S$ were a monoidal groupoid (every arrow in $S$ is an isomorphism), then $e$ would be an inital object of $\lr {S,S}$ and therefore 
+we have that  
+$S^{-1} \mathbf 1 \eqv B \lr {S,S}$
+is contractible.
+\end{remark}
+
+\begin{definition}[invertible action]
+We say that $S$ acts \emph{invertibly} if each translation $s \boxtimes : X \to X$ is a homotopy equivalence.
+\end{definition}
+
+If $S$ acts invertibly on $S^{-1}X$ by $s \boxtimes (t,x) = (s \square t, x)$, which the homotopy inverse $s \boxtimes (t,x) = (t,s \boxtimes x)$
+since there is a natural transformation $(t,x) \mapsto (s \square t, s \boxtimes x)$.
+
+We combine these obesrvations to get the following,
+\begin{proposition}
+Since $\pi_0S$ is a multiplicatively closed subset of the ring $H_0(S) = \Z[\pi_0S],$
+it acts on $H_*(X)$ and acts invertibly on $H_*(S^{-1}X)$.
+The functor $X \to S^{-1}X$ described by $x \mapsto (0,x)$ induces the map
+
+\begin{equation}
+  (\pi_0S)^{-1} H_q(X) \to H_q(S^{-1}X)
+  \label{eq:localaction}
+\end{equation}
+\end{proposition}
+
+We have the following result due to Quillen, showing us that $B(S^{-1}S)$ is indeed a group completion of $BS$. (See [Grayson])
+\begin{theorem}[Quillen]\label{thm:BSgroup}
+Let $S$ be a faithful symmetric monoidal groupoid. Then (\ref{eq:localaction}) is an isomorphism for all $X$ and $q$.
+In particular, $B(S^{-1}S)$ is a group completion of the $H$-space $BS$.
 \end{theorem}
+\subsection{Relation to the $+$-construction}
+
+In order to deduce $K(\mathbf P(R))$, we will first deduce $K(\mathbf F(R))$ and use a fact about cofinality to 
+get our result.
 
 \begin{theorem}[Quillen]
 Let $S = \coprod GL_n(R)$ which is equivalent to $\mathbf F(R)$.
@@ -564,16 +829,88 @@ B(S^{-1}S) \eqv \Z \times BGL(R)^+
 \]
 \end{theorem}
 \begin{proof}
+We will try to find an acyclic map from $BGL(R)$ to the connected basepoint component of $B(S^{-1}S)$.
+We perform this via the mapping telescope construction which describes the homotopy colimit.
+\[
+BGL(R) = \varhocolim BGL_n(R)
+\]
+Homotopy classes of maps $BGL(R) \to B(S^{-1}S)$ correspond to compatible homotopy classes maps
+$BGL_n(R) \to B(S^{-1}S)$ for all $n$.
+Note that group maps $GL_n(R) \to \Aut_{S^{-1}S}(R^n, R^n)$ describe maps from $BGL_n(R) \to B(S^{-1}S)$.
+In fact, we have maps $f_n(g) = (g,1)$ for each $n$ and the following diagram commutes.
+\[
+\begin{tikzcd}
+GL_n(R) \arrow[r, "f_n"] \arrow[d, "\square R"'] & \Aut(R^n,R^n) \arrow[d, "\square (R R)"] \\
+GL_{n+1}(R) \arrow[r, "f_{n+1}"] & \Aut(R^{n+1}, R^{n+1})
+\end{tikzcd}
+\]
+This implies we have natural transformations $f_{n} \To f_{n+1}(\square R)$,
+which induce the homotopies $f_{n} \To f_{n+1}(\square R) : BGL_n(R) \to B(S^{-1}S)$.
+Due to this compatibility of $f_n$, we get a map out of the mapping telescope
+$f : BGL(R) \to B(S^{-1}S)$.
+
+Furthermore, the map lands in the connected component $Y_S$ of the identity in $B(S^{-1}S)$,
+which is also a $H$-space. 
+
+We will now show that this map $BGL(R) \to Y_S$ is an isomorphism on integral homology. 
+By Proposition \ref{prop:acyclic_H_space}, this will induce a homotopy equivalence $BGL(R)^+ \to Y_S$.
+
+Let $e \in \pi_0BS$ denote the path connected component of $R$ in $BS$.
+By Theorem \ref{thm:BSgroup}, $H_*(BS^{-1}S)$ is the localization of the ring $H_*(BS)$ at $\pi_0S = \{e^n\}$.
+But this is just the colimit
+\[
+H_*(BS) \to H_*(BS) \to H_*(BS) \to H_*(BS) \to \cdots 
+\]
+where the maps are given by the translation $\oplus R : S \to S$.
+So $H_*B(S^{-1}S) \cong H_* (Y_S) \otimes \Z[e,e^{-1}]$ which will allow us to recover $B(S^{-1}S) \eqv \Z \times Y_S$.
+Finally, we have the chain
+\[H_*(Y_S) \cong \colim H_*(BGL_n(R)) = H_*(BGL(R))\]
+And this shows $H_*(BGL(R)) \to Y_S$ is a homology isomorphism.
 \end{proof}
 
-\begin{theorem}
-Let $S$ be a symmetric monoidal groupoid with faithful transitions satisfying cofinality.
+\subsection{Cofinality and Equivalence with $+$-construction}
 
-We have then 
-\[
-K^\square(S) \eqv K^\square_0 (S) \times B \Aut(S)^+A 
-\]
+A monoidal functor $f : S \to T$ of faithful symmetric monoidal groupoids is said to be \emph{cofinal} if for 
+every $t$ in $T$, there is some $s$ in $S$ and $u$ in $T$ such that $t \square u \cong f(s)$.
+The inclusion functor $\mathbf F(R) \to \mathbf P(R)$ for instance, is cofinal,
+because every projective module is a direct summand of a free module.
+
+We have the following result which allows us to $K_n(T)$, a proof of which is outlined in [Weibel].
+
+\begin{theorem}[Cofinality Theorem]
+Let $f : S \to T$ be a cofinal monoidal functor of symmetric monoidal categories. Then
+\begin{enumerate}
+  \item If $T$ acts on $X$, then $S$ acts on $T$ via $f$, and $S^{-1}X \eqv S^{-1}X$.
+  \item If $\Aut_S(s) \cong \Aut_T(fs)$ for all $s$ in $S$, then the basepoint components
+  of $K(S)$ and $K(T)$ are homotopy equivalent.
+  In particular, $K_n(S) \cong K_n(T)$ for $n \geq 1$.
+\end{enumerate}
 \end{theorem}
+%\begin{proof}
+%By cofinality, $S$ acts invertibly on $X$ if and only if $T$ acts invertibly on $X$. 
+%
+%\end{proof}
+
+Owing to this Theorem, the fact that $\mathbf F(R)$ is cofinal in $\mathbf P(R)$, 
+we have the following corollary.
+
+\begin{corollary}
+Let $S = \iso \mathbf P(R)$ be the (faithful) symmetric monoidal groupoid of finitely generated
+projective $R$-modules. Then
+\begin{equation}
+B(S^{-1}S) \eqv K_0(R) \times BGL(R)^+
+  \label{eq:Sequals+}
+\end{equation}
+\end{corollary}
+
+%\begin{theorem}
+%%Let $S$ be a symmetric monoidal groupoid with faithful transitions satisfying cofinality.
+%
+%We have then 
+%\[
+%K^\square(S) \eqv K^\square_0 (S) \times B \Aut(S)^+A 
+%\]
+%\end{theorem}
 
 \section{Quillen's $Q$-construction}\label{sec:Qconstruction}
 In [Quillen, 19XX], Quillen proposed another construction for the $K$-theory space.
@@ -590,7 +927,7 @@ C & D \arrow[l,two heads, "j"] \arrow[r,tail, "i"] & C'
 \]
 where two such diagrams are considered isomorphic when there is an isomorphism of these diagrams which is identity on $C$ and $C'$.
 
-The composition of the above arrow with $\Qmor{C'}{D'}{C''}$ is given by $\Qmor{C}{D \times_{C'} D'}{C''}$
+The composition of the above arrow with $\Qmor{C'}{D'}{C''}$ is given by $\Qmor{C}{D \times_{C'} D'}{C''}$ from the diagram
 \[
 \begin{tikzcd}%[column sep=large]
 D \times_{C'} D' \arrow[r, tail, "\pi_2"] \arrow[d, two heads, "\pi_1"'] & D' \arrow[r, tail, "i'"] \arrow[d, two heads, "j'"]& C''\\
@@ -623,7 +960,7 @@ in terms of \emph{subobjects} and \emph{subquotients}. Fix some object $C'$ in $
 \begin{definition}
 An \emph{admissible subobject} of $C'$ is an equivalence class of admissible monomorphisms
 $C \admono C'$ with equivalence given by whether they factor through each other, 
-or in other words as isomorphism in $\A \downarrow C$. 
+or in other words as isomorphism in $\A \back C$. 
 
 An \emph{admissible subquotient} is defined in the dual manner, using admissible epimorphisms.
 \end{definition}
