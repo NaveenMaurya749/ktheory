@@ -3,7 +3,7 @@ This is my repository for my Master's Project A in the semester of Aug-Nov 2026 
 
 **Author:** Naveen Maurya
 
-# Abstract
+## Abstract
 Algebraic $K$-theory associates to a ring $R$ a sequence of abelian groups
 $K_n(R)$ encoding its finitely generated projective modules, in analogy with
 the topological $K$-theory of vector bundles. This thesis gives an
