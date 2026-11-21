@@ -27,7 +27,7 @@ degrees and with each other, culminating in the $"+ = Q"$ theorem.
 
 ```
 ktheory/
-├── main.tex          # Root document (adjust if your entry file is named differently)
+├── main.tex          # Root document
 ├── references.bib    # Bibliography database (biblatex)
 ├── content/          # One .tex file per chapter
 | ├── chapter1.tex    # Preliminaries
@@ -35,7 +35,7 @@ ktheory/
 | ├── chapter3.tex    # Groups K_1 and K_2 of a ring
 | ├── chapter4.tex    # Homotopy Theory Preliminaries
 | └── chapter5.tex    # Higher K-Theory and the K_n Groups
-└── README.md
+└── README.md         # This page
 ```
 
 ## Building
