@@ -20,7 +20,7 @@ categories, $H$-spaces, Quillen's Theorems A and B, and the $+$-construction,
 we define the higher groups $K_n(R)$ in three ways: through the
 $BGL(R)^+$ construction, the $S^{-1}S$ construction, and Quillen's
 $Q$-construction. We show that these agree with the classical groups in low
-degrees and with each other, culminating in the ``$+ = Q$'' theorem.
+degrees and with each other, culminating in the $"+ = Q"$ theorem.
 
 
 ## Repository layout
